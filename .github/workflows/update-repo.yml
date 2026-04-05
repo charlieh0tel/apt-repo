@@ -1,0 +1,57 @@
+name: Update APT Repository
+
+on:
+  workflow_dispatch:
+  repository_dispatch:
+    types: [update-apt-repo]
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Install reprepro
+      run: sudo apt-get update && sudo apt-get install -y reprepro
+
+    - name: Import GPG key
+      env:
+        GPG_PRIVATE_KEY: ${{ secrets.GPG_PRIVATE_KEY }}
+      run: echo "$GPG_PRIVATE_KEY" | gpg --batch --import
+
+    - name: Download debs from releases
+      env:
+        GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      run: |
+        mkdir -p debs
+        repos=(
+          "charlieh0tel/renogy-rs"
+          "charlieh0tel/rotaryclub"
+          "charlieh0tel/usbrelay-rs"
+          "charlieh0tel/weather-rs"
+          "charlieh0tel/wg-netns"
+        )
+        for repo in "${repos[@]}"; do
+          echo "Fetching latest release from ${repo}..."
+          gh release download --repo "${repo}" --pattern "*.deb" --dir debs 2>/dev/null || echo "  No release found for ${repo}"
+        done
+        echo "Downloaded debs:"
+        ls -la debs/ || echo "No debs found"
+
+    - name: Build repository
+      run: |
+        for deb in debs/*.deb; do
+          [ -f "$deb" ] || continue
+          echo "Adding ${deb}..."
+          reprepro --basedir . includedeb bookworm "${deb}" 2>&1 || echo "  Skipped ${deb}"
+        done
+
+    - name: Deploy to GitHub Pages
+      uses: peaceiris/actions-gh-pages@v4
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: .
+        exclude_assets: '.github,conf,.git,.gitignore'
+        force_orphan: true
