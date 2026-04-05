@@ -42,13 +42,15 @@ jobs:
 
     - name: Build repository
       run: |
-        mkdir -p site
+        mkdir -p site/conf
+        cp conf/distributions site/conf/
         for deb in debs/*.deb; do
           [ -f "$deb" ] || continue
           echo "Adding ${deb}..."
-          reprepro --basedir site --confdir conf includedeb bookworm "${deb}" 2>&1 || echo "  Skipped ${deb}"
+          reprepro -V --basedir ./site includedeb bookworm "${deb}" 2>&1 || echo "  Skipped ${deb}"
         done
         cp public.key site/
+        rm -rf site/conf site/db
 
     - name: Deploy to GitHub Pages
       uses: peaceiris/actions-gh-pages@v4
