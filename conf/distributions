@@ -1,7 +1,7 @@
 Origin: charlieh0tel
 Label: charlieh0tel
 Codename: bookworm
-Architectures: amd64 arm64 all
+Architectures: amd64 arm64
 Components: main
 Description: charlieh0tel APT repository
 SignWith: A913FC709FC04F202A4EECF477CD38547561F4EC
