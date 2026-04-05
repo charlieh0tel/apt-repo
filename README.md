@@ -23,6 +23,7 @@ sudo apt-get install renogy-rs   # or any other package
 - **usbrelay-rs** -- USB relay utilities
 - **weather** -- Weather with text-to-speech
 - **wg-netns** -- WireGuard in network namespaces
+- **w6otx** -- W6OTX repeater power control
 
 ## Updating the repository
 

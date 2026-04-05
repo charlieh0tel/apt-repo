@@ -34,6 +34,7 @@ jobs:
           "charlieh0tel/usbrelay-rs"
           "charlieh0tel/weather-rs"
           "charlieh0tel/wg-netns"
+          "PAARA-org/w6otx"
         )
         for repo in "${repos[@]}"; do
           echo "Fetching latest release from ${repo}..."
