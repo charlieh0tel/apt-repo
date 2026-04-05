@@ -42,16 +42,17 @@ jobs:
 
     - name: Build repository
       run: |
+        mkdir -p site
         for deb in debs/*.deb; do
           [ -f "$deb" ] || continue
           echo "Adding ${deb}..."
-          reprepro --basedir . includedeb bookworm "${deb}" 2>&1 || echo "  Skipped ${deb}"
+          reprepro --basedir site --confdir conf includedeb bookworm "${deb}" 2>&1 || echo "  Skipped ${deb}"
         done
+        cp public.key site/
 
     - name: Deploy to GitHub Pages
       uses: peaceiris/actions-gh-pages@v4
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
-        publish_dir: .
-        exclude_assets: '.github,conf,.git,.gitignore'
+        publish_dir: ./site
         force_orphan: true
