@@ -1,0 +1,112 @@
+Package: renogy-rs
+Version: 0.2.3-1
+Architecture: amd64
+Homepage: https://github.com/charlieh0tel/renogy-rs
+Maintainer: Christopher Hoover <ch@murgatroid.com>
+Installed-Size: 19977
+Depends: libc6 (>= 2.34)
+Priority: optional
+Section: hamradio
+Filename: pool/main/r/renogy-rs/renogy-rs_0.2.3-1_amd64.deb
+Size: 4396880
+SHA256: edcf4864e746d29f4651ea7ec0e559379a8c60d5f2f4fb5a142f30c2a6cf599b
+SHA1: df7a1268c184a89716a9f9c8c53361412ad6499a
+MD5sum: 9a52886978ee3b77660c63bd73a7f766
+Description: Rust tools for monitoring Renogy BMS batteries via Bluetooth and serial
+ Rust tools for monitoring Renogy BMS batteries via Bluetooth and serial, with
+ APRS telemetry reporting and a terminal UI.
+
+Package: rotaryclub
+Version: 2.2.3-1
+Architecture: amd64
+Homepage: https://github.com/charlieh0tel/rotaryclub
+Maintainer: Christopher Hoover <ch@murgatroid.com>
+Installed-Size: 2138
+Depends: libasound2, libasound2t64 (>= 1.0.29), libc6 (>= 2.34), libdbus-1-3 (>= 1.9.14)
+Priority: optional
+Section: hamradio
+Filename: pool/main/r/rotaryclub/rotaryclub_2.2.3-1_amd64.deb
+Size: 777496
+SHA256: af468a0b92a159fc8a1cbcb64d37ec36a9bcac0e1300810fa1d3e6fbc4043db4
+SHA1: d5a09750382202981bfc1ace770bee96396e672e
+MD5sum: c4fef4acc4e0075923c425bea428caf3
+Description: Pseudo-Doppler Radio Direction Finding system
+ A pseudo-Doppler radio direction finding (RDF) system implementation in Rust.
+ Processes stereo audio from a rotating antenna array to calculate radio signal
+ bearings with high accuracy (~1-2° with correlation method).
+ .
+ Features:
+ - Two bearing calculation methods (zero-crossing and I/Q correlation)
+ - Digital phase-locked loop (DPLL) for robust north reference tracking
+ - Automatic gain control (AGC) for varying signal strengths
+ - Real-time audio processing with low latency
+ - CLI with configurable parameters
+
+Package: usbrelay-rs
+Version: 0.1.1-1
+Architecture: amd64
+Homepage: https://github.com/charlieh0tel/usbrelay-rs
+Maintainer: Christopher Hoover <ch@murgatroid.com>
+Installed-Size: 871
+Depends: libc6 (>= 2.34), libftdi1-2 (>= 1.2)
+Priority: optional
+Section: utility
+Filename: pool/main/u/usbrelay-rs/usbrelay-rs_0.1.1-1_amd64.deb
+Size: 309004
+SHA256: 32a7cf129f44a42897b782741c97e8f408d9b7f38a5043f54cc6df4abcd95393
+SHA1: a49f511ea32adf16d030d48123975c8739c9b69a
+MD5sum: 18e102981c903bb3439bb4b9b7c8dfcd
+Description: USB relay support
+ USB relay utilities.
+
+Package: w6otx
+Version: 0.8.3-1
+Architecture: amd64
+Maintainer: Christopher Hoover <ch@murgatroid.com>
+Installed-Size: 2689
+Depends: libc6 (>= 2.34)
+Priority: optional
+Section: utility
+Filename: pool/main/w/w6otx/w6otx_0.8.3-1_amd64.deb
+Size: 770372
+SHA256: 9d6f823920f0b70924dfa2a381dd19386217d08d7bdaf108fd4efc89316e0051
+SHA1: 0c902b7ed047bbea0ebf84623597fc58b9c4719c
+MD5sum: 89d3d309c16c7bd77f5d25dd550c20ab
+Description: Power control CLI and web app for W6OTX repeater system.
+ Care and feeding of the W6OTX repeaters.
+ .
+ 73 DE AI6KG
+
+Package: weather
+Version: 0.9.2-1
+Architecture: amd64
+Maintainer: Christopher Hoover <ch@murgatroid.com>
+Installed-Size: 10249
+Depends: libasound2t64 (>= 1.0.29), libc6 (>= 2.34), libc6 (>= 2.39), libespeak-ng1, libespeak-ng1 (>= 1.51+dfsg), sox
+Priority: optional
+Section: utility
+Filename: pool/main/w/weather/weather_0.9.2-1_amd64.deb
+Size: 2162620
+SHA256: 3b4b3f5d1d9c1331b5b8a181277fb5d681e23c325775e557d8bb4d4faacee2b6
+SHA1: 4c2200d399bad759584dbcb7b6bd0e4147ea171c
+MD5sum: 6a903247486df4350a90e11e2ee0b930
+Description: Weather application with text-to-speech support
+ A weather application with text-to-speech support.
+ Supports multiple TTS backends including espeak and Google TTS.
+
+Package: wg-netns
+Version: 1.0.2-1+ci23993564208~git449188e1
+Architecture: all
+Maintainer: Christopher Hoover <ch@murgatroid.com>
+Installed-Size: 35
+Depends: python3:any
+Priority: optional
+Section: contrib/net
+Filename: pool/main/w/wg-netns/wg-netns_1.0.2-1+ci23993564208~git449188e1_all.deb
+Size: 6996
+SHA256: c4a8c4e90711a418d41cc162e402bf2f762ef39cb0318572e9384d7a01b38d90
+SHA1: 3a39121b90e224ffe3903cc2020424aa187a0818
+MD5sum: 870a9543c8ac2022ffa13c26469cfcd9
+Description: Wireguard in network namespaces.
+ Support for setting up wireguard in network namespaces.
+
