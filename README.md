@@ -2,7 +2,9 @@
 
 APT repository hosted on GitHub Pages. Packages are built from various repos and published here for easy installation via `apt`.
 
-## Setup
+## Adding the repository to a host
+
+Run the following on the target machine to trust the signing key, add the repo, and install a package:
 
 ```bash
 # Import the signing key
