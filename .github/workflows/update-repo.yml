@@ -29,6 +29,7 @@ jobs:
       run: |
         mkdir -p debs
         repos=(
+          "charlieh0tel/asl-dmr-bridge"
           "charlieh0tel/renogy-rs"
           "charlieh0tel/rotaryclub"
           "charlieh0tel/usbrelay-rs"
