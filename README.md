@@ -61,7 +61,7 @@ After publishing a new release, a source repo can notify this APT repo to rebuil
 
 **Setup:**
 
-1. Create a [Personal Access Token](https://github.com/settings/tokens) (classic or fine-grained) with `repo` scope on the `charlieh0tel/apt-repo` repository.
+1. Create a fine-grained [Personal Access Token](https://github.com/settings/tokens) with `Contents: Read and write` permission on the `charlieh0tel/apt-repo` repository.
 2. Add the token as a secret named `APT_REPO_TOKEN` in the source repository's settings (`Settings → Secrets and variables → Actions`).
 3. Add the step above after the step that publishes the release.
 
