@@ -17,7 +17,7 @@ sudo apt-get install renogy-rs   # or any other package
 ```
 
 ## Available packages
-
+- **asl-dmr-bridge** -- ASL DMR Bridge
 - **renogy-rs** -- Renogy BMS monitoring tools
 - **rotaryclub** -- Pseudo-Doppler radio direction finding
 - **usbrelay-rs** -- USB relay utilities
