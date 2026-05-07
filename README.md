@@ -17,19 +17,42 @@ sudo apt-get install renogy-rs   # or any other package
 ```
 
 ## Available packages
-- **asl-dmr-bridge** -- ASL DMR Bridge
-- **renogy-rs** -- Renogy BMS monitoring tools
-- **rotaryclub** -- Pseudo-Doppler radio direction finding
-- **usbrelay-rs** -- USB relay utilities
-- **weather** -- Weather with text-to-speech
-- **wg-netns** -- WireGuard in network namespaces
-- **w6otx** -- W6OTX repeater power control
+
+| Package | Source | Description |
+|---------|--------|-------------|
+| **asl-dmr-bridge** | [charlieh0tel/asl-dmr-bridge](https://github.com/charlieh0tel/asl-dmr-bridge) | ASL DMR Bridge |
+| **renogy-rs** | [charlieh0tel/renogy-rs](https://github.com/charlieh0tel/renogy-rs) | Renogy BMS monitoring tools |
+| **rotaryclub** | [charlieh0tel/rotaryclub](https://github.com/charlieh0tel/rotaryclub) | Pseudo-Doppler radio direction finding |
+| **usbrelay-rs** | [charlieh0tel/usbrelay-rs](https://github.com/charlieh0tel/usbrelay-rs) | USB relay utilities |
+| **weather** | [charlieh0tel/weather-rs](https://github.com/charlieh0tel/weather-rs) | Weather with text-to-speech |
+| **wg-netns** | [charlieh0tel/wg-netns](https://github.com/charlieh0tel/wg-netns) | WireGuard in network namespaces |
+| **w6otx** | [PAARA-org/w6otx](https://github.com/PAARA-org/w6otx) | W6OTX repeater power control |
 
 ## Updating the repository
 
 The repository is rebuilt when:
 - Manually triggered via `workflow_dispatch`
-- A repo sends a `repository_dispatch` event with type `update-apt-repo`
+- Automatically every day at 06:00 UTC via a scheduled cron job
+- A source repo sends a `repository_dispatch` event with type `update-apt-repo`
+
+### Configuring a repo to trigger an APT repo rebuild
+
+After publishing a new release, a source repo can notify this APT repo to rebuild immediately by sending a `repository_dispatch` event. Add the following step to the source repo's release workflow:
+
+```yaml
+- name: Trigger APT repo rebuild
+  uses: peter-evans/repository-dispatch@v3
+  with:
+    token: ${{ secrets.APT_REPO_TOKEN }}
+    repository: charlieh0tel/apt-repo
+    event-type: update-apt-repo
+```
+
+**Setup:**
+
+1. Create a [Personal Access Token](https://github.com/settings/tokens) (classic or fine-grained) with `repo` scope on the `charlieh0tel/apt-repo` repository.
+2. Add the token as a secret named `APT_REPO_TOKEN` in the source repository's settings (`Settings → Secrets and variables → Actions`).
+3. Add the step above after the step that publishes the release.
 
 ## License
 
