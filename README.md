@@ -35,6 +35,15 @@ The repository is rebuilt when:
 - Automatically every day at 06:00 UTC via a scheduled cron job
 - A source repo sends a `repository_dispatch` event with type `update-apt-repo`
 
+### Manual update
+
+**Via the GitHub UI:** Go to [Actions → Update APT Repository](https://github.com/charlieh0tel/apt-repo/actions/workflows/update-repo.yml), click **Run workflow**, and confirm.
+
+**Via the CLI:**
+```bash
+gh workflow run update-repo.yml --repo charlieh0tel/apt-repo
+```
+
 ### Configuring a repo to trigger an APT repo rebuild
 
 After publishing a new release, a source repo can notify this APT repo to rebuild immediately by sending a `repository_dispatch` event. Add the following step to the source repo's release workflow:
