@@ -34,6 +34,17 @@ sudo apt-get install renogy-rs   # or any other package
 
 ## Maintaining this repository
 
+### Triggering a rebuild
+
+The repository rebuilds automatically every day at 06:00 UTC, so new package releases will appear within a day with no additional setup. A rebuild can also be triggered manually:
+
+**Via the GitHub UI:** Go to [Actions → Update APT Repository](https://github.com/charlieh0tel/apt-repo/actions/workflows/update-repo.yml), click **Run workflow**, and confirm.
+
+**Via the CLI:**
+```bash
+gh workflow run update-repo.yml --repo charlieh0tel/apt-repo
+```
+
 ### Adding a source repo
 
 To add a new source repository whose `.deb` releases will be included in this APT repo:
@@ -46,42 +57,24 @@ To add a new source repository whose `.deb` releases will be included in this AP
 
 2. Run `./update-packages.sh` to regenerate the packages table in this README.
 
-3. Optionally configure the source repo to trigger an automatic rebuild on release (see below).
+3. Optionally, configure the source repo to trigger an immediate rebuild whenever it publishes a release, rather than waiting for the daily cron. Add this step to the source repo's release workflow:
 
-### Triggering a rebuild
+   ```yaml
+   - name: Trigger APT repo rebuild
+     uses: peter-evans/repository-dispatch@v3
+     with:
+       token: ${{ secrets.APT_REPO_TOKEN }}
+       repository: charlieh0tel/apt-repo
+       event-type: update-apt-repo
+   ```
 
-The repository is rebuilt when:
-- Manually triggered via `workflow_dispatch`
-- Automatically every day at 06:00 UTC via a scheduled cron job
-- A source repo sends a `repository_dispatch` event with type `update-apt-repo`
+   **Setup:**
 
-**Via the GitHub UI:** Go to [Actions → Update APT Repository](https://github.com/charlieh0tel/apt-repo/actions/workflows/update-repo.yml), click **Run workflow**, and confirm.
+   1. Create a fine-grained [Personal Access Token](https://github.com/settings/tokens) with `Contents: Read and write` permission on the `charlieh0tel/apt-repo` repository.
+   2. Add the token as a secret named `APT_REPO_TOKEN` in the source repository's settings (`Settings → Secrets and variables → Actions`).
+   3. Add the step above after the step that publishes the release.
 
-**Via the CLI:**
-```bash
-gh workflow run update-repo.yml --repo charlieh0tel/apt-repo
-```
-
-### Configuring a source repo to trigger rebuilds
-
-After publishing a new release, a source repo can notify this APT repo to rebuild immediately by sending a `repository_dispatch` event. Add the following step to the source repo's release workflow:
-
-```yaml
-- name: Trigger APT repo rebuild
-  uses: peter-evans/repository-dispatch@v3
-  with:
-    token: ${{ secrets.APT_REPO_TOKEN }}
-    repository: charlieh0tel/apt-repo
-    event-type: update-apt-repo
-```
-
-**Setup:**
-
-1. Create a fine-grained [Personal Access Token](https://github.com/settings/tokens) with `Contents: Read and write` permission on the `charlieh0tel/apt-repo` repository.
-2. Add the token as a secret named `APT_REPO_TOKEN` in the source repository's settings (`Settings → Secrets and variables → Actions`).
-3. Add the step above after the step that publishes the release.
-
-To apply the token to all source repos at once, use `set-apt-repo-token.sh`.
+   To apply the token to all source repos at once, use `set-apt-repo-token.sh`.
 
 ## License
 
