@@ -14,7 +14,7 @@ while IFS=$'\t' read -r repo package description; do
     [[ -z "$repo" || "$repo" == \#* ]] && continue
     url="https://github.com/${repo}"
     table+=$'\n'"| **${package}** | [${repo}](${url}) | ${description} |"
-done < "$PACKAGES_TSV"
+done < <(sort "$PACKAGES_TSV")
 
 awk -v table="$table" '
 /<!-- packages-start -->/ { print; print table; skip=1; next }
