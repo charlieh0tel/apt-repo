@@ -1,15 +1,8 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-REPOS=(
-    charlieh0tel/asl-dmr-bridge
-    charlieh0tel/renogy-rs
-    charlieh0tel/rotaryclub
-    charlieh0tel/usbrelay-rs
-    charlieh0tel/weather-rs
-    charlieh0tel/wg-netns
-    PAARA-org/w6otx
-)
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+mapfile -t REPOS < <(awk -F'\t' '!/^#/ && NF>0 {print $1}' "${SCRIPT_DIR}/packages.tsv" | grep '^charlieh0tel/')
 
 if [[ $# -ne 1 ]]; then
     echo "Usage: $0 <token>" >&2
