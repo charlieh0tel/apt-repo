@@ -20,6 +20,7 @@ sudo apt-get install renogy-rs   # or any other package
 
 ## Available packages
 
+<!-- packages-start -->
 | Package | Source | Description |
 |---------|--------|-------------|
 | **asl-dmr-bridge** | [charlieh0tel/asl-dmr-bridge](https://github.com/charlieh0tel/asl-dmr-bridge) | ASL DMR Bridge |
@@ -29,15 +30,30 @@ sudo apt-get install renogy-rs   # or any other package
 | **weather** | [charlieh0tel/weather-rs](https://github.com/charlieh0tel/weather-rs) | Weather with text-to-speech |
 | **wg-netns** | [charlieh0tel/wg-netns](https://github.com/charlieh0tel/wg-netns) | WireGuard in network namespaces |
 | **w6otx** | [PAARA-org/w6otx](https://github.com/PAARA-org/w6otx) | W6OTX repeater power control |
+<!-- packages-end -->
 
-## Updating the repository
+## Maintaining this repository
+
+### Adding a source repo
+
+To add a new source repository whose `.deb` releases will be included in this APT repo:
+
+1. Add a line to `packages.tsv` (tab-separated: `owner/repo`, package name, description):
+
+   ```
+   owner/new-repo	package-name	Short description
+   ```
+
+2. Run `./update-packages.sh` to regenerate the packages table in this README.
+
+3. Optionally configure the source repo to trigger an automatic rebuild on release (see below).
+
+### Triggering a rebuild
 
 The repository is rebuilt when:
 - Manually triggered via `workflow_dispatch`
 - Automatically every day at 06:00 UTC via a scheduled cron job
 - A source repo sends a `repository_dispatch` event with type `update-apt-repo`
-
-### Manual update
 
 **Via the GitHub UI:** Go to [Actions → Update APT Repository](https://github.com/charlieh0tel/apt-repo/actions/workflows/update-repo.yml), click **Run workflow**, and confirm.
 
@@ -46,7 +62,7 @@ The repository is rebuilt when:
 gh workflow run update-repo.yml --repo charlieh0tel/apt-repo
 ```
 
-### Configuring a repo to trigger an APT repo rebuild
+### Configuring a source repo to trigger rebuilds
 
 After publishing a new release, a source repo can notify this APT repo to rebuild immediately by sending a `repository_dispatch` event. Add the following step to the source repo's release workflow:
 
@@ -64,6 +80,8 @@ After publishing a new release, a source repo can notify this APT repo to rebuil
 1. Create a fine-grained [Personal Access Token](https://github.com/settings/tokens) with `Contents: Read and write` permission on the `charlieh0tel/apt-repo` repository.
 2. Add the token as a secret named `APT_REPO_TOKEN` in the source repository's settings (`Settings → Secrets and variables → Actions`).
 3. Add the step above after the step that publishes the release.
+
+To apply the token to all source repos at once, use `set-apt-repo-token.sh`.
 
 ## License
 
