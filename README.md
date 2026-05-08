@@ -74,7 +74,7 @@ To add a new source repository whose `.deb` releases will be included in this AP
    2. Add the token as a secret named `APT_REPO_TOKEN` in the source repository's settings (`Settings → Secrets and variables → Actions`).
    3. Add the step above after the step that publishes the release.
 
-   To apply the token to all source repos at once, use `set-apt-repo-token.sh`.
+   To apply the token to all `charlieh0tel/` source repos at once, use `set-apt-repo-token.sh`.
 
 ## License
 
