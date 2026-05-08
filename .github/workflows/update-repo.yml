@@ -28,15 +28,7 @@ jobs:
         GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       run: |
         mkdir -p debs
-        repos=(
-          "charlieh0tel/asl-dmr-bridge"
-          "charlieh0tel/renogy-rs"
-          "charlieh0tel/rotaryclub"
-          "charlieh0tel/usbrelay-rs"
-          "charlieh0tel/weather-rs"
-          "charlieh0tel/wg-netns"
-          "PAARA-org/w6otx"
-        )
+        mapfile -t repos < <(awk -F'\t' '!/^#/ && NF>0 {print $1}' packages.tsv)
         for repo in "${repos[@]}"; do
           echo "Fetching latest release from ${repo}..."
           gh release download --repo "${repo}" --pattern "*.deb" --dir debs 2>/dev/null || echo "  No release found for ${repo}"
