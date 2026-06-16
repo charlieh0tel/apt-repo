@@ -47,6 +47,7 @@ jobs:
         done
         cp public.key site/
         rm -rf site/conf site/db
+        ./generate-index.sh site/index.html
 
     - name: Deploy to GitHub Pages
       uses: peaceiris/actions-gh-pages@v4
