@@ -15,7 +15,7 @@ echo "deb [signed-by=/usr/share/keyrings/charlieh0tel.gpg] https://charlieh0tel.
 
 # Update and install
 sudo apt-get update
-sudo apt-get install renogy-rs   # or any other package
+sudo apt-get install rotaryclub   # or any other package
 ```
 
 ## Available packages
