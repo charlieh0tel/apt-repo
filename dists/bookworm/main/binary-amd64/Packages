@@ -1,0 +1,187 @@
+Package: asl-dmr-bridge
+Version: 2.26.0-1
+Architecture: amd64
+Maintainer: Christopher Hoover (AI6KG) <ch@murgatroid.com>
+Installed-Size: 51345
+Depends: libasound2 (>= 1.0.29), libc6 (>= 2.34), libstdc++6 (>= 11), libudev1, wget
+Priority: optional
+Section: hamradio
+Filename: pool/main/a/asl-dmr-bridge/asl-dmr-bridge_2.26.0-1_amd64.deb
+Size: 20292888
+SHA256: 403ed7f61a361d8bcb96dc18716d455207d445a980fbc3b6a31fc12ca048250c
+SHA1: 117a8ede8aa6d65127a5176a34fbd947e3620470
+MD5sum: f17fc714b0a74fb11f45b9b37c89837d
+Description: Bridge between AllStarLink (ASL3) FM repeaters and Brandmeister DMR networks
+ via the Homebrew protocol.
+ asl-dmr-bridge connects an AllStarLink (ASL3) FM node to a Brandmeister DMR
+ repeater over the Homebrew protocol, transcoding USRP-format audio to AMBE+2
+ via a neural / dynarmic / ThumbDV / AMBEserver backend.  Includes a systemd
+ unit and a sample configuration.
+
+Package: renogymon-aprs
+Version: 1.0.0-1
+Architecture: amd64
+Homepage: https://github.com/charlieh0tel/renogymon
+Maintainer: Christopher Hoover <ch@murgatroid.com>
+Installed-Size: 6060
+Depends: libc6 (>= 2.34)
+Priority: optional
+Section: hamradio
+Filename: pool/main/r/renogymon-aprs/renogymon-aprs_1.0.0-1_amd64.deb
+Size: 2057748
+SHA256: bc90a0177fbaa25ca36b2cd3479b07b83da672dbcadba8de309b9983aeed006c
+SHA1: e6487c894061d3181e09d61247c8204c82697bbe
+MD5sum: bd6f613bfd28d8b80502d64be6662ebd
+Description: Report Renogy BMS telemetry to APRS via direwolf
+ Reads Renogy BMS telemetry from VictoriaMetrics and reports it to APRS via
+ direwolf.
+
+Package: renogymon-archiver
+Version: 1.0.0-1
+Architecture: amd64
+Homepage: https://github.com/charlieh0tel/renogymon
+Maintainer: Christopher Hoover <ch@murgatroid.com>
+Installed-Size: 9341
+Depends: libc6 (>= 2.34), rsync
+Recommends: openssh-server
+Priority: optional
+Section: hamradio
+Filename: pool/main/r/renogymon-archiver/renogymon-archiver_1.0.0-1_amd64.deb
+Size: 2581420
+SHA256: a2a04bd64c99ad8cbcc9afea777427fbc778d549353e077b9b16264b9d67aadf
+SHA1: 353c4154003580871f2c61aff972cbdb375ff293
+MD5sum: 5a7fa32118f69621fc2ff9807e5fc5cb
+Description: Export Renogy BMS metrics from VictoriaMetrics to Parquet
+ Exports Renogy BMS history from VictoriaMetrics to daily Parquet files for an
+ archive host to pull.
+
+Package: renogymon-archiver-puller
+Version: 1.0.0-1
+Architecture: amd64
+Homepage: https://github.com/charlieh0tel/renogymon
+Maintainer: Christopher Hoover <ch@murgatroid.com>
+Installed-Size: 1780
+Depends: libc6 (>= 2.34), openssh-client, rsync
+Priority: optional
+Section: utils
+Filename: pool/main/r/renogymon-archiver-puller/renogymon-archiver-puller_1.0.0-1_amd64.deb
+Size: 623272
+SHA256: 530e9eb50cf10a73be8a0b8c8aaba7430b83439bbadb5d6093179d53771b8e76
+SHA1: fac030fe62ab4576c4018b72d0d153607078f061
+MD5sum: 2d37537fbbea37f6e1f98d93b70b7798
+Description: Pull Renogy Parquet archives from the RPi4 over Tailscale
+ Pulls daily Parquet archives staged by renogymon-archiver on the RPi4 over
+ rsync/SSH (Tailscale), deleting them on the source after a successful transfer.
+
+Package: renogymon-collector
+Version: 1.0.0-1
+Architecture: amd64
+Homepage: https://github.com/charlieh0tel/renogymon
+Maintainer: Christopher Hoover <ch@murgatroid.com>
+Installed-Size: 14119
+Depends: libc6 (>= 2.34)
+Priority: optional
+Section: hamradio
+Filename: pool/main/r/renogymon-collector/renogymon-collector_1.0.0-1_amd64.deb
+Size: 3682388
+SHA256: f45e34c25c3d4c0920aa498f5591d80c0e83c1be1fab2c39ac50f335c01b966b
+SHA1: 60c7e69c75bc14693561d5b91d69dcf4b8fba426
+MD5sum: 9b5f21c13427ff6557e05408b3f40fc3
+Description: Collect Renogy BMS metrics to VictoriaMetrics, with a terminal UI
+ Collects Renogy BMS metrics over Bluetooth/serial and exports to
+ VictoriaMetrics, plus a terminal UI.
+
+Package: rotaryclub
+Version: 2.2.3-1
+Architecture: amd64
+Homepage: https://github.com/charlieh0tel/rotaryclub
+Maintainer: Christopher Hoover <ch@murgatroid.com>
+Installed-Size: 2138
+Depends: libasound2, libasound2t64 (>= 1.0.29), libc6 (>= 2.34), libdbus-1-3 (>= 1.9.14)
+Priority: optional
+Section: hamradio
+Filename: pool/main/r/rotaryclub/rotaryclub_2.2.3-1_amd64.deb
+Size: 777496
+SHA256: af468a0b92a159fc8a1cbcb64d37ec36a9bcac0e1300810fa1d3e6fbc4043db4
+SHA1: d5a09750382202981bfc1ace770bee96396e672e
+MD5sum: c4fef4acc4e0075923c425bea428caf3
+Description: Pseudo-Doppler Radio Direction Finding system
+ A pseudo-Doppler radio direction finding (RDF) system implementation in Rust.
+ Processes stereo audio from a rotating antenna array to calculate radio signal
+ bearings with high accuracy (~1-2° with correlation method).
+ .
+ Features:
+ - Two bearing calculation methods (zero-crossing and I/Q correlation)
+ - Digital phase-locked loop (DPLL) for robust north reference tracking
+ - Automatic gain control (AGC) for varying signal strengths
+ - Real-time audio processing with low latency
+ - CLI with configurable parameters
+
+Package: usbrelay-rs
+Version: 0.1.1-1
+Architecture: amd64
+Homepage: https://github.com/charlieh0tel/usbrelay-rs
+Maintainer: Christopher Hoover <ch@murgatroid.com>
+Installed-Size: 871
+Depends: libc6 (>= 2.34), libftdi1-2 (>= 1.2)
+Priority: optional
+Section: utility
+Filename: pool/main/u/usbrelay-rs/usbrelay-rs_0.1.1-1_amd64.deb
+Size: 309004
+SHA256: 32a7cf129f44a42897b782741c97e8f408d9b7f38a5043f54cc6df4abcd95393
+SHA1: a49f511ea32adf16d030d48123975c8739c9b69a
+MD5sum: 18e102981c903bb3439bb4b9b7c8dfcd
+Description: USB relay support
+ USB relay utilities.
+
+Package: w6otx
+Version: 0.8.3-1
+Architecture: amd64
+Maintainer: Christopher Hoover <ch@murgatroid.com>
+Installed-Size: 2689
+Depends: libc6 (>= 2.34)
+Priority: optional
+Section: utility
+Filename: pool/main/w/w6otx/w6otx_0.8.3-1_amd64.deb
+Size: 770372
+SHA256: 9d6f823920f0b70924dfa2a381dd19386217d08d7bdaf108fd4efc89316e0051
+SHA1: 0c902b7ed047bbea0ebf84623597fc58b9c4719c
+MD5sum: 89d3d309c16c7bd77f5d25dd550c20ab
+Description: Power control CLI and web app for W6OTX repeater system.
+ Care and feeding of the W6OTX repeaters.
+ .
+ 73 DE AI6KG
+
+Package: weather
+Version: 0.9.2-1
+Architecture: amd64
+Maintainer: Christopher Hoover <ch@murgatroid.com>
+Installed-Size: 10249
+Depends: libasound2t64 (>= 1.0.29), libc6 (>= 2.34), libc6 (>= 2.39), libespeak-ng1, libespeak-ng1 (>= 1.51+dfsg), sox
+Priority: optional
+Section: utility
+Filename: pool/main/w/weather/weather_0.9.2-1_amd64.deb
+Size: 2162620
+SHA256: 3b4b3f5d1d9c1331b5b8a181277fb5d681e23c325775e557d8bb4d4faacee2b6
+SHA1: 4c2200d399bad759584dbcb7b6bd0e4147ea171c
+MD5sum: 6a903247486df4350a90e11e2ee0b930
+Description: Weather application with text-to-speech support
+ A weather application with text-to-speech support.
+ Supports multiple TTS backends including espeak and Google TTS.
+
+Package: wg-netns
+Version: 1.0.2-1+ci23993564208~git449188e1
+Architecture: all
+Maintainer: Christopher Hoover <ch@murgatroid.com>
+Installed-Size: 35
+Depends: python3:any
+Priority: optional
+Section: contrib/net
+Filename: pool/main/w/wg-netns/wg-netns_1.0.2-1+ci23993564208~git449188e1_all.deb
+Size: 6996
+SHA256: c4a8c4e90711a418d41cc162e402bf2f762ef39cb0318572e9384d7a01b38d90
+SHA1: 3a39121b90e224ffe3903cc2020424aa187a0818
+MD5sum: 870a9543c8ac2022ffa13c26469cfcd9
+Description: Wireguard in network namespaces.
+ Support for setting up wireguard in network namespaces.
+
