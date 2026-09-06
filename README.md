@@ -24,7 +24,8 @@ sudo apt-get install rotaryclub   # or any other package
 | Package | Source | Description |
 |---------|--------|-------------|
 | **asl-dmr-bridge** | [charlieh0tel/asl-dmr-bridge](https://github.com/charlieh0tel/asl-dmr-bridge) | ASL DMR Bridge |
-| **renogy-rs** | [charlieh0tel/renogy-rs](https://github.com/charlieh0tel/renogy-rs) | Renogy BMS monitoring tools |
+| **lantiq-exporter** | [charlieh0tel/lantiq-exporter](https://github.com/charlieh0tel/lantiq-exporter) | Prometheus exporter for a Lantiq/Falcon GPON ONT |
+| **renogymon** | [charlieh0tel/renogymon](https://github.com/charlieh0tel/renogymon) | Renogy BMS monitoring tools |
 | **rotaryclub** | [charlieh0tel/rotaryclub](https://github.com/charlieh0tel/rotaryclub) | Pseudo-Doppler radio direction finding |
 | **usbrelay-rs** | [charlieh0tel/usbrelay-rs](https://github.com/charlieh0tel/usbrelay-rs) | USB relay utilities |
 | **weather** | [charlieh0tel/weather-rs](https://github.com/charlieh0tel/weather-rs) | Weather with text-to-speech |
