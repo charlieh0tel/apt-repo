@@ -59,22 +59,33 @@ To add a new source repository whose `.deb` releases will be included in this AP
 
 2. Run `./update-packages.sh` to regenerate the packages table in this README.
 
-3. Optionally, configure the source repo to trigger an immediate rebuild whenever it publishes a release, rather than waiting for the daily cron. Add this step to the source repo's release workflow:
+3. Optionally, configure the source repo to trigger an immediate rebuild whenever it publishes a release, rather than waiting for the daily cron.
+
+   Add this job to the workflow that publishes the release, naming whichever job builds the package in `needs:`:
 
    ```yaml
-   - name: Trigger APT repo rebuild
-     uses: peter-evans/repository-dispatch@v3
-     with:
-       token: ${{ secrets.APT_REPO_TOKEN }}
-       repository: charlieh0tel/apt-repo
-       event-type: update-apt-repo
+   trigger-apt-repo:
+     needs: build-deb
+     # Only for tags, when the workflow also runs on branches or PRs.
+     if: startsWith(github.ref, 'refs/tags/v')
+     runs-on: ubuntu-22.04
+     steps:
+       - name: Trigger APT repo rebuild
+         uses: peter-evans/repository-dispatch@v4
+         with:
+           token: ${{ secrets.APT_REPO_TOKEN }}
+           repository: charlieh0tel/apt-repo
+           event-type: update-apt-repo
    ```
+
+   `needs:` matters: without it the dispatch can fire for a release that failed to build, and the rebuild finds nothing to fetch.
+
+   A job rather than a step, because a repo whose package is built by a reusable workflow has no step of its own to put this after. Where the release is published by a step in this same workflow, the same `Trigger APT repo rebuild` step can simply follow it.
 
    **Setup:**
 
    1. Create a fine-grained [Personal Access Token](https://github.com/settings/tokens) with `Contents: Read and write` permission on the `charlieh0tel/apt-repo` repository.
    2. Add the token as a secret named `APT_REPO_TOKEN` in the source repository's settings (`Settings → Secrets and variables → Actions`).
-   3. Add the step above after the step that publishes the release.
 
    To apply the token to all `charlieh0tel/` source repos at once, use `set-apt-repo-token.sh`.
 
