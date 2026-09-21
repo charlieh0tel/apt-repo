@@ -27,6 +27,7 @@ sudo apt-get install rotaryclub   # or any other package
 | **lantiq-exporter** | [charlieh0tel/lantiq-exporter](https://github.com/charlieh0tel/lantiq-exporter) | Prometheus exporter for a Lantiq/Falcon GPON ONT |
 | **renogymon** | [charlieh0tel/renogymon](https://github.com/charlieh0tel/renogymon) | Renogy BMS monitoring tools |
 | **rotaryclub** | [charlieh0tel/rotaryclub](https://github.com/charlieh0tel/rotaryclub) | Pseudo-Doppler radio direction finding |
+| **smartclockmon** | [charlieh0tel/smartclockmon](https://github.com/charlieh0tel/smartclockmon) | HP / Symmetricom SmartClock GPS receiver monitoring |
 | **usbrelay-rs** | [charlieh0tel/usbrelay-rs](https://github.com/charlieh0tel/usbrelay-rs) | USB relay utilities |
 | **weather** | [charlieh0tel/weather-rs](https://github.com/charlieh0tel/weather-rs) | Weather with text-to-speech |
 | **wg-netns** | [charlieh0tel/wg-netns](https://github.com/charlieh0tel/wg-netns) | WireGuard in network namespaces |
