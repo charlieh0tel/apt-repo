@@ -13,14 +13,29 @@ fi
 
 TOKEN="$1"
 
-# Every repo in packages.tsv, not just charlieh0tel/ ones: a repo in
-# another org needs the token just as much, and filtering them out is how
-# PAARA-org/w6otx went unnoticed without one.  Setting a secret needs
-# admin on the repo, so those may fail -- collect the failures and report
-# them at the end rather than aborting partway through.
+# Every repo in packages.tsv, except the ones listed below: a repo we do
+# not control needs deciding about, not silently dropping -- quietly
+# filtering to charlieh0tel/ is how PAARA-org/w6otx went unnoticed
+# without a token.  A skip here is a decision, and it says why.
+#
+# A secret is readable by anyone who can run a workflow in that repo, and
+# this token can write to apt-repo, whose .debs install as root.  So it
+# goes only in repos whose push access we control.  A skipped repo still
+# gets its releases picked up by the daily cron.
+declare -A SKIP=(
+    [PAARA-org/w6otx]="another org: push access there is not ours to control"
+)
+
+# Setting a secret needs admin on the repo, so a call can still fail --
+# collect the failures and report them at the end rather than aborting
+# partway through and leaving the repos after it unset.
 FAILED=()
 
 for repo in "${REPOS[@]}"; do
+    if [[ -v SKIP[$repo] ]]; then
+        echo "Skipping $repo: ${SKIP[$repo]}"
+        continue
+    fi
     echo "Setting APT_REPO_TOKEN on $repo..."
     if ! gh secret set APT_REPO_TOKEN --repo "$repo" --body "$TOKEN"; then
         FAILED+=("$repo")
