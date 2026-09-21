@@ -87,10 +87,20 @@ To add a new source repository whose `.deb` releases will be included in this AP
    1. Create a fine-grained [Personal Access Token](https://github.com/settings/tokens) with `Contents: Read and write` permission on the `charlieh0tel/apt-repo` repository.
    2. Add the token as a secret named `APT_REPO_TOKEN` in the source repository's settings (`Settings → Secrets and variables → Actions`).
 
-   To apply the token to every source repo in `packages.tsv` at once, use
-   `set-apt-repo-token.sh`.  Setting a secret requires admin on the repo, so
-   repos in another org may need whoever holds admin there to run it; the
-   script reports the ones it could not set and exits non-zero.
+   To apply the token to the source repos in `packages.tsv` at once, use
+   `set-apt-repo-token.sh`.
+
+   The token can write to this repository, and a secret is readable by anyone
+   who can run a workflow in the repo holding it, so it goes only in repos
+   whose push access we control.  A repo we do not control is listed in the
+   script's `SKIP` table with the reason, rather than quietly left out.  Such a
+   repo needs no dispatch job: the daily cron above fetches the latest release
+   of every repo listed here, so its packages still land, with up to a day of
+   lag.  To pick one up sooner, run the update workflow by hand:
+
+   ```
+   gh workflow run update-repo.yml -R charlieh0tel/apt-repo
+   ```
 
 ## License
 
