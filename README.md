@@ -87,7 +87,10 @@ To add a new source repository whose `.deb` releases will be included in this AP
    1. Create a fine-grained [Personal Access Token](https://github.com/settings/tokens) with `Contents: Read and write` permission on the `charlieh0tel/apt-repo` repository.
    2. Add the token as a secret named `APT_REPO_TOKEN` in the source repository's settings (`Settings → Secrets and variables → Actions`).
 
-   To apply the token to all `charlieh0tel/` source repos at once, use `set-apt-repo-token.sh`.
+   To apply the token to every source repo in `packages.tsv` at once, use
+   `set-apt-repo-token.sh`.  Setting a secret requires admin on the repo, so
+   repos in another org may need whoever holds admin there to run it; the
+   script reports the ones it could not set and exits non-zero.
 
 ## License
 
