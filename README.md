@@ -40,6 +40,12 @@ sudo apt-get install rotaryclub   # or any other package
 
 The repository rebuilds automatically every day at 06:00 UTC, so new package releases will appear within a day with no additional setup. A rebuild can also be triggered manually:
 
+The workflow runs in two jobs. `build` fetches the latest release of every
+repository in `packages.tsv`, assembles the repository with `reprepro` and
+signs it; `publish` takes what `build` produced and pushes it to `gh-pages`.
+They are separate so that the third-party action that publishes never runs in
+a job where the signing key exists.
+
 **Via the GitHub UI:** Go to [Actions → Update APT Repository](https://github.com/charlieh0tel/apt-repo/actions/workflows/update-repo.yml), click **Run workflow**, and confirm.
 
 **Via the CLI:**

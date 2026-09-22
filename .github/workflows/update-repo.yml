@@ -5,15 +5,21 @@ on:
   repository_dispatch:
     types: [update-apt-repo]
   schedule:
-    - cron: '0 6 * * *'
+    # Off the hour: scheduled jobs on the hour queue behind everyone else's.
+    - cron: '17 6 * * *'
 
+# Two jobs on purpose. Building the repository needs the signing key;
+# publishing it needs write access to this repository. Keeping them apart
+# means the third-party action that publishes never runs in a job where
+# GPG_PRIVATE_KEY exists, so a compromised release of it cannot reach the key
+# that signs every package people install.
 jobs:
-  update:
+  build:
     runs-on: ubuntu-latest
     permissions:
-      contents: write
+      contents: read
     steps:
-    - uses: actions/checkout@v4
+    - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1  # v7.0.1
 
     - name: Install reprepro
       run: sudo apt-get update && sudo apt-get install -y reprepro
@@ -49,8 +55,27 @@ jobs:
         rm -rf site/conf site/db
         ./generate-index.sh site/index.html
 
+    - name: Hand the built repository to the publishing job
+      uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a  # v7.0.1
+      with:
+        name: apt-site
+        path: site
+        retention-days: 1
+
+  publish:
+    needs: build
+    runs-on: ubuntu-latest
+    # No GPG key in this job. It publishes what build produced and signed.
+    permissions:
+      contents: write
+    steps:
+    - uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c  # v8.0.1
+      with:
+        name: apt-site
+        path: site
+
     - name: Deploy to GitHub Pages
-      uses: peaceiris/actions-gh-pages@v4
+      uses: peaceiris/actions-gh-pages@84c30a85c19949d7eee79c4ff27748b70285e453  # v4.1.0
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
         publish_dir: ./site
