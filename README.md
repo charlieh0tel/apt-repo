@@ -84,15 +84,16 @@ To add a new source repository whose `.deb` releases will be included in this AP
 
    **Setup:**
 
-   1. Create a fine-grained [Personal Access Token](https://github.com/settings/tokens) with `Contents: Read and write` permission on the `charlieh0tel/apt-repo` repository.
+   1. Create a fine-grained [Personal Access Token](https://github.com/settings/personal-access-tokens) restricted to the `charlieh0tel/apt-repo` repository, with `Actions: Read and write` and nothing else. (`Metadata: Read-only` is added for you and cannot be removed.) Not `Contents: Read and write`: that would let the token push a commit to `update-repo.yml`, the workflow that imports the GPG key.
    2. Add the token as a secret named `APT_REPO_TOKEN` in the source repository's settings (`Settings → Secrets and variables → Actions`).
 
-   To apply the token to the source repos in `packages.tsv` at once, use
-   `set-apt-repo-token.sh`.
+   To apply the token to the source repos in `packages.tsv` at once, run
+   `set-apt-repo-token.sh`. It takes no arguments and reads the token from the
+   terminal, so the token stays out of your shell history and out of `ps`.
 
-   The token can write to this repository, and a secret is readable by anyone
-   who can run a workflow in the repo holding it, so it goes only in repos
-   whose push access we control.  A repo we do not control is listed in the
+   The token can start workflows in this repository, and a secret is readable
+   by anyone who can run a workflow in the repo holding it, so it goes only in
+   repos whose push access we control.  A repo we do not control is listed in the
    script's `SKIP` table with the reason, rather than quietly left out.  Such a
    repo needs no dispatch job: the daily cron above fetches the latest release
    of every repo listed here, so its packages still land, with up to a day of
