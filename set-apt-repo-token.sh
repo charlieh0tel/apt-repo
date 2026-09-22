@@ -6,12 +6,22 @@ set -o pipefail
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 mapfile -t REPOS < <(awk -F'\t' '!/^#/ && NF>0 {print $1}' "${SCRIPT_DIR}/packages.tsv")
 
-if [[ $# -ne 1 ]]; then
-    echo "Usage: $0 <token>" >&2
+# Read rather than take an argument. A token on the command line is in the
+# shell history of whoever ran it and in `ps` output while it runs, which is
+# a poor resting place for a credential that can start workflows in the
+# repository that signs every package.
+if [[ $# -ne 0 ]]; then
+    echo "Usage: $0" >&2
+    echo "Reads the token from the terminal; do not pass it as an argument." >&2
     exit 1
 fi
 
-TOKEN="$1"
+read -rsp "Token for APT_REPO_TOKEN: " TOKEN
+echo
+if [[ -z "$TOKEN" ]]; then
+    echo "No token given." >&2
+    exit 1
+fi
 
 # Every repo in packages.tsv, except the ones listed below: a repo we do
 # not control needs deciding about, not silently dropping -- quietly
@@ -19,8 +29,10 @@ TOKEN="$1"
 # without a token.  A skip here is a decision, and it says why.
 #
 # A secret is readable by anyone who can run a workflow in that repo, and
-# this token can write to apt-repo, whose .debs install as root.  So it
-# goes only in repos whose push access we control.  A skipped repo still
+# this token can start workflows in apt-repo, whose .debs install as root.
+# So it goes only in repos whose push access we control.  The token wants
+# Actions: write on apt-repo and nothing else -- not Contents: write, which
+# would let it rewrite the workflow that holds the signing key.  A skipped repo still
 # gets its releases picked up by the daily cron.
 declare -A SKIP=(
     [PAARA-org/w6otx]="another org: push access there is not ours to control"
@@ -37,7 +49,9 @@ for repo in "${REPOS[@]}"; do
         continue
     fi
     echo "Setting APT_REPO_TOKEN on $repo..."
-    if ! gh secret set APT_REPO_TOKEN --repo "$repo" --body "$TOKEN"; then
+    # Through stdin, not --body: an argument is visible in `ps` for as long
+    # as the call takes.
+    if ! printf '%s' "$TOKEN" | gh secret set APT_REPO_TOKEN --repo "$repo"; then
         FAILED+=("$repo")
     fi
 done
