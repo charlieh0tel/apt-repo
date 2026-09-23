@@ -2,8 +2,6 @@ name: Update APT Repository
 
 on:
   workflow_dispatch:
-  repository_dispatch:
-    types: [update-apt-repo]
   schedule:
     # Off the hour: scheduled jobs on the hour queue behind everyone else's.
     - cron: '17 6 * * *'
