@@ -77,14 +77,17 @@ To add a new source repository whose `.deb` releases will be included in this AP
      runs-on: ubuntu-22.04
      steps:
        - name: Trigger APT repo rebuild
-         uses: peter-evans/repository-dispatch@v4
-         with:
-           token: ${{ secrets.APT_REPO_TOKEN }}
-           repository: charlieh0tel/apt-repo
-           event-type: update-apt-repo
+         env:
+           GH_TOKEN: ${{ secrets.APT_REPO_TOKEN }}
+         run: gh workflow run update-repo.yml -R charlieh0tel/apt-repo
    ```
 
    `needs:` matters: without it the dispatch can fire for a release that failed to build, and the rebuild finds nothing to fetch.
+
+   `gh workflow run`, not `repository_dispatch`: the token then needs `Actions:
+   write` on this repository rather than `Contents: write`, which could push a
+   commit to the workflow that holds the signing key. This workflow no longer
+   accepts `repository_dispatch` at all.
 
    A job rather than a step, because a repo whose package is built by a reusable workflow has no step of its own to put this after. Where the release is published by a step in this same workflow, the same `Trigger APT repo rebuild` step can simply follow it.
 
