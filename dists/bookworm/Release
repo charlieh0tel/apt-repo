@@ -1,0 +1,28 @@
+Origin: charlieh0tel
+Label: charlieh0tel
+Codename: bookworm
+Date: Sat, 26 Sep 2026 19:10:10 UTC
+Architectures: amd64 arm64
+Components: main
+Description: charlieh0tel APT repository
+MD5Sum:
+ 21ee51eb3691cc739cc13daa0cc7df28 8888 main/binary-amd64/Packages
+ 1dfc91c7da46142060e362072612ba29 3451 main/binary-amd64/Packages.gz
+ 8320f79d8b28e846498abe21eebdcc27 118 main/binary-amd64/Release
+ aeb9435590421a94e8995fc132c93075 8409 main/binary-arm64/Packages
+ 87004838e7a310c2190c14c0ad452504 3274 main/binary-arm64/Packages.gz
+ 3d813d3f8eba0ba932046763d012bbff 118 main/binary-arm64/Release
+SHA1:
+ 52d4cb11dea08e1bd74cd62c91c060e8ab2bac0e 8888 main/binary-amd64/Packages
+ e193ffb635a07f9a67bcfb36b1f2aef8a60ed7db 3451 main/binary-amd64/Packages.gz
+ cdd27bd5dee1f476312c8431950170016692c234 118 main/binary-amd64/Release
+ ad20f7d257c5a66bb5d92f9655916101915ce778 8409 main/binary-arm64/Packages
+ c84bb5a79c9b38293346b90c083b276c62ab7ecc 3274 main/binary-arm64/Packages.gz
+ b3f1501b9b9db38348001250127223710730ec4b 118 main/binary-arm64/Release
+SHA256:
+ 86d164c09b5fad61c87e86a363488da70a1fc3e803b9d4f92b2e03ccc6504e4d 8888 main/binary-amd64/Packages
+ 8c7e335d011bc8c41de0d1c056d3cda9e86137ddd8fe5892f94c966129e3208b 3451 main/binary-amd64/Packages.gz
+ 6f19a6464fd06cf9d7af5e602400067eac6a89e5c96dadb4cef64a4dbfadbce2 118 main/binary-amd64/Release
+ 6f0fecc5cb45b94416af41a8a1265ab25cb79b22cf62b5c8296eef3b6b026c69 8409 main/binary-arm64/Packages
+ 52f4baa64b8861a8272477ab9acb72268418fb81bd21ccc988cfb38c45cb0f52 3274 main/binary-arm64/Packages.gz
+ 0d4482d92a854b6e9618a607c45d2509431e1bc23e32be01b0345a6758abf75b 118 main/binary-arm64/Release
