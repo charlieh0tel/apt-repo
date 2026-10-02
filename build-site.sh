@@ -102,10 +102,9 @@ main() {
     echo "Usage: $0 [SITE_DIR]" >&2
     exit 1
   fi
-  local site="${1:-site}" debs
+  local site="${1:-site}"
   debs="$(mktemp -d)"
-  # Expanded now: the trap runs after main's locals are gone.
-  trap "rm -rf '${debs}'" EXIT
+  trap 'rm -rf "${debs}"' EXIT
 
   fetch_debs "${debs}"
   echo "Downloaded debs:"
