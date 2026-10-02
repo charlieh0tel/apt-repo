@@ -30,9 +30,9 @@ sudo apt-get install rotaryclub   # or any other package
 | **rotaryclub** | [charlieh0tel/rotaryclub](https://github.com/charlieh0tel/rotaryclub) | Pseudo-Doppler radio direction finding |
 | **smartclockmon** | [charlieh0tel/smartclockmon](https://github.com/charlieh0tel/smartclockmon) | HP / Symmetricom SmartClock GPS receiver monitoring |
 | **usbrelay-rs** | [charlieh0tel/usbrelay-rs](https://github.com/charlieh0tel/usbrelay-rs) | USB relay utilities |
+| **w6otx** | [PAARA-org/w6otx](https://github.com/PAARA-org/w6otx) | W6OTX repeater power control |
 | **weather** | [charlieh0tel/weather-rs](https://github.com/charlieh0tel/weather-rs) | Weather with text-to-speech |
 | **wg-netns** | [charlieh0tel/wg-netns](https://github.com/charlieh0tel/wg-netns) | WireGuard in network namespaces |
-| **w6otx** | [PAARA-org/w6otx](https://github.com/PAARA-org/w6otx) | W6OTX repeater power control |
 <!-- packages-end -->
 
 ## Maintaining this repository
