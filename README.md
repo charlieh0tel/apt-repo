@@ -51,6 +51,14 @@ a job where the signing key exists.
 
 **Via the CLI:**
 ```bash
+./kick-build.sh
+```
+
+This dispatches the workflow and watches the run until it finishes, exiting
+non-zero if it fails.  Pass `--no-watch` to return as soon as it is dispatched.
+It is a wrapper around:
+
+```bash
 gh workflow run update-repo.yml --repo charlieh0tel/apt-repo
 ```
 
