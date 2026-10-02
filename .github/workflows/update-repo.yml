@@ -12,6 +12,14 @@ on:
 # GPG_PRIVATE_KEY exists, so a compromised release of it cannot reach the key
 # that signs every package people install.
 jobs:
+  lint:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+    - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1  # v7.0.1
+    - run: shellcheck -x ./*.sh
+
   build:
     runs-on: ubuntu-latest
     permissions:
@@ -27,31 +35,10 @@ jobs:
         GPG_PRIVATE_KEY: ${{ secrets.GPG_PRIVATE_KEY }}
       run: echo "$GPG_PRIVATE_KEY" | gpg --batch --import
 
-    - name: Download debs from releases
+    - name: Build repository
       env:
         GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      run: |
-        mkdir -p debs
-        mapfile -t repos < <(awk -F'\t' '!/^#/ && NF>0 {print $1}' packages.tsv)
-        for repo in "${repos[@]}"; do
-          echo "Fetching latest release from ${repo}..."
-          gh release download --repo "${repo}" --pattern "*.deb" --dir debs 2>/dev/null || echo "  No release found for ${repo}"
-        done
-        echo "Downloaded debs:"
-        ls -la debs/ || echo "No debs found"
-
-    - name: Build repository
-      run: |
-        mkdir -p site/conf
-        cp conf/distributions site/conf/
-        for deb in debs/*.deb; do
-          [ -f "$deb" ] || continue
-          echo "Adding ${deb}..."
-          reprepro -V --basedir ./site includedeb bookworm "${deb}" 2>&1 || echo "  Skipped ${deb}"
-        done
-        cp public.key site/
-        rm -rf site/conf site/db
-        ./generate-index.sh site/index.html
+      run: ./build-site.sh site
 
     - name: Hand the built repository to the publishing job
       uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a  # v7.0.1

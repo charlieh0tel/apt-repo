@@ -1,70 +1,70 @@
-#!/usr/bin/env bash
-set -o errexit
-set -o nounset
-set -o pipefail
-
-SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-mapfile -t REPOS < <(awk -F'\t' '!/^#/ && NF>0 {print $1}' "${SCRIPT_DIR}/packages.tsv")
-
-# Read rather than take an argument. A token on the command line is in the
-# shell history of whoever ran it and in `ps` output while it runs, which is
-# a poor resting place for a credential that can start workflows in the
-# repository that signs every package.
-if [[ $# -ne 0 ]]; then
-    echo "Usage: $0" >&2
-    echo "Reads the token from the terminal; do not pass it as an argument." >&2
-    exit 1
-fi
-
-read -rsp "Token for APT_REPO_TOKEN: " TOKEN
-echo
-if [[ -z "$TOKEN" ]]; then
-    echo "No token given." >&2
-    exit 1
-fi
-
-# Every repo in packages.tsv, except the ones listed below: a repo we do
-# not control needs deciding about, not silently dropping -- quietly
-# filtering to charlieh0tel/ is how PAARA-org/w6otx went unnoticed
-# without a token.  A skip here is a decision, and it says why.
+#!/bin/bash
+# Set the APT_REPO_TOKEN secret on every source repo in packages.tsv.
 #
-# A secret is readable by anyone who can run a workflow in that repo, and
-# this token can start workflows in apt-repo, whose .debs install as root.
-# So it goes only in repos whose push access we control.  The token wants
-# Actions: write on apt-repo and nothing else -- not Contents: write, which
-# would let it rewrite the workflow that holds the signing key.  A skipped repo still
-# gets its releases picked up by the daily cron.
-declare -A SKIP=(
-    [PAARA-org/w6otx]="another org: push access there is not ours to control"
+# The token lets a source repo's release workflow start the update workflow
+# here, so a new release lands without waiting for the daily cron.  README.md
+# describes the token and why it is scoped the way it is.
+set -o errexit -o nounset -o pipefail
+
+# shellcheck source=lib.sh
+source "$(dirname "${BASH_SOURCE[0]}")/lib.sh"
+
+# Every repo in packages.tsv gets the token except these.  A secret is
+# readable by anyone who can run a workflow in the repo holding it, so the
+# token goes only in repos whose push access we control.  A skip here is a
+# decision, and it says why; a skipped repo is still picked up by the cron.
+declare -rA SKIP=(
+  [PAARA-org/w6otx]="another org: push access there is not ours to control"
 )
 
-# Setting a secret needs admin on the repo, so a call can still fail --
-# collect the failures and report them at the end rather than aborting
-# partway through and leaving the repos after it unset.
-FAILED=()
-
-for repo in "${REPOS[@]}"; do
-    if [[ -v SKIP[$repo] ]]; then
-        echo "Skipping $repo: ${SKIP[$repo]}"
-        continue
-    fi
-    echo "Setting APT_REPO_TOKEN on $repo..."
-    # Through stdin, not --body: an argument is visible in `ps` for as long
-    # as the call takes.
-    if ! printf '%s' "$TOKEN" | gh secret set APT_REPO_TOKEN --repo "$repo"; then
-        FAILED+=("$repo")
-    fi
-done
-
-if [[ ${#FAILED[@]} -gt 0 ]]; then
-    echo >&2
-    echo "Failed to set APT_REPO_TOKEN on ${#FAILED[@]} repo(s):" >&2
-    printf '  %s\n' "${FAILED[@]}" >&2
-    echo >&2
-    echo "Setting a secret requires admin on the repository.  Until it is" >&2
-    echo "set, that repo's trigger-apt-repo job fails on a tagged release" >&2
-    echo "and the APT repo picks the release up on its daily cron instead." >&2
+main() {
+  # Read the token rather than take it as an argument: an argument lands in
+  # shell history and is visible in `ps` for as long as the script runs.
+  if [[ $# -ne 0 ]]; then
+    cat >&2 <<EOT
+Usage: $0
+Reads the token from the terminal; do not pass it as an argument.
+EOT
     exit 1
-fi
+  fi
 
-echo "Done."
+  local token
+  read -rsp "Token for APT_REPO_TOKEN: " token
+  echo
+  if [[ -z "${token}" ]]; then
+    echo "No token given." >&2
+    exit 1
+  fi
+
+  # Setting a secret needs admin on the repo, so a call can fail.  Collect
+  # the failures and report them at the end rather than stopping partway.
+  local repo failed=()
+  while IFS=$'\t' read -r repo _; do
+    if [[ -v SKIP[${repo}] ]]; then
+      echo "Skipping ${repo}: ${SKIP[${repo}]}"
+      continue
+    fi
+    echo "Setting APT_REPO_TOKEN on ${repo}..."
+    # Through stdin, not --body, to keep the token out of `ps`.
+    if ! printf '%s' "${token}" | gh secret set APT_REPO_TOKEN --repo "${repo}"
+    then
+      failed+=("${repo}")
+    fi
+  done < <(packages)
+
+  if [[ ${#failed[@]} -gt 0 ]]; then
+    cat >&2 <<EOT
+
+Failed to set APT_REPO_TOKEN on ${#failed[@]} repo(s):
+$(printf '  %s\n' "${failed[@]}")
+
+Setting a secret requires admin on the repository.  Until it is set, that
+repo's trigger-apt-repo job fails on a tagged release and the APT repo picks
+the release up on its daily cron instead.
+EOT
+    exit 1
+  fi
+  echo "Done."
+}
+
+main "$@"

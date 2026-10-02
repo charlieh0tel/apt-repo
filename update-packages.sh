@@ -1,25 +1,27 @@
-#!/usr/bin/env bash
-set -o errexit
-set -o nounset
-set -o pipefail
+#!/bin/bash
+# Regenerate the package table in README.md from packages.tsv.
+set -o errexit -o nounset -o pipefail
 
-SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-PACKAGES_TSV="${SCRIPT_DIR}/packages.tsv"
-README="${SCRIPT_DIR}/README.md"
+# shellcheck source=lib.sh
+source "$(dirname "${BASH_SOURCE[0]}")/lib.sh"
 
-table="| Package | Source | Description |
-|---------|--------|-------------|"
+readonly README="${REPO_DIR}/README.md"
 
-while IFS=$'\t' read -r repo package description; do
-    [[ -z "$repo" || "$repo" == \#* ]] && continue
-    url="https://github.com/${repo}"
-    table+=$'\n'"| **${package}** | [${repo}](${url}) | ${description} |"
-done < <(sort "$PACKAGES_TSV")
+main() {
+  local table
+  table="$(packages | awk -F'\t' '
+    BEGIN {
+      print "| Package | Source | Description |"
+      print "|---------|--------|-------------|"
+    }
+    { printf "| **%s** | [%s](https://github.com/%s) | %s |\n", $2, $1, $1, $3 }
+  ')"
+  awk -v table="${table}" '
+    /<!-- packages-start -->/ { print; print table; skip = 1; next }
+    /<!-- packages-end -->/ { skip = 0 }
+    !skip { print }
+  ' "${README}" > "${README}.tmp" && mv "${README}.tmp" "${README}"
+  echo "Updated ${README}"
+}
 
-awk -v table="$table" '
-/<!-- packages-start -->/ { print; print table; skip=1; next }
-/<!-- packages-end -->/ { skip=0 }
-!skip { print }
-' "$README" > "${README}.tmp" && mv "${README}.tmp" "$README"
-
-echo "Updated ${README}"
+main "$@"
