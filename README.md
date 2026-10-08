@@ -29,7 +29,7 @@ sudo apt-get install rotaryclub   # or any other package
 | **renogymon** | [charlieh0tel/renogymon](https://github.com/charlieh0tel/renogymon) | Renogy BMS monitoring tools |
 | **rotaryclub** | [charlieh0tel/rotaryclub](https://github.com/charlieh0tel/rotaryclub) | Pseudo-Doppler radio direction finding |
 | **smartclockmon** | [charlieh0tel/smartclockmon](https://github.com/charlieh0tel/smartclockmon) | HP / Symmetricom SmartClock GPS receiver monitoring |
-| **tempered** | [charlieh0tel/tempered-hid](https://github.com/charlieh0tel/tempered-hid) | TEMPerGold USB thermometer as a Linux IIO device |
+| **temper, temper-iio** | [charlieh0tel/temper](https://github.com/charlieh0tel/temper) | TEMPerGold/TEMPerHUM USB sticks: CLI, and Linux IIO devices |
 | **usbrelay-rs** | [charlieh0tel/usbrelay-rs](https://github.com/charlieh0tel/usbrelay-rs) | USB relay utilities |
 | **w6otx** | [PAARA-org/w6otx](https://github.com/PAARA-org/w6otx) | W6OTX repeater power control |
 | **weather** | [charlieh0tel/weather-rs](https://github.com/charlieh0tel/weather-rs) | Weather with text-to-speech |

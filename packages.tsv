@@ -3,7 +3,7 @@ charlieh0tel/lantiq-exporter	lantiq-exporter	Prometheus exporter for a Lantiq/Fa
 charlieh0tel/renogymon	renogymon	Renogy BMS monitoring tools
 charlieh0tel/rotaryclub	rotaryclub	Pseudo-Doppler radio direction finding
 charlieh0tel/smartclockmon	smartclockmon	HP / Symmetricom SmartClock GPS receiver monitoring
-charlieh0tel/tempered-hid	tempered	TEMPerGold USB thermometer as a Linux IIO device
+charlieh0tel/temper	temper, temper-iio	TEMPerGold/TEMPerHUM USB sticks: CLI, and Linux IIO devices
 charlieh0tel/usbrelay-rs	usbrelay-rs	USB relay utilities
 charlieh0tel/weather-rs	weather	Weather with text-to-speech
 charlieh0tel/wg-netns	wg-netns	WireGuard in network namespaces
