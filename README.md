@@ -25,6 +25,7 @@ sudo apt-get install rotaryclub   # or any other package
 |---------|--------|-------------|
 | **agent-tools** | [charlieh0tel/agent-tools](https://github.com/charlieh0tel/agent-tools) | Find running coding agents and their working directories |
 | **asl-dmr-bridge** | [charlieh0tel/asl-dmr-bridge](https://github.com/charlieh0tel/asl-dmr-bridge) | ASL DMR Bridge |
+| **jackerymon** | [charlieh0tel/jackerymon](https://github.com/charlieh0tel/jackerymon) | Jackery Explorer power station monitor over BLE |
 | **lantiq-exporter** | [charlieh0tel/lantiq-exporter](https://github.com/charlieh0tel/lantiq-exporter) | Prometheus exporter for a Lantiq/Falcon GPON ONT |
 | **renogymon** | [charlieh0tel/renogymon](https://github.com/charlieh0tel/renogymon) | Renogy BMS monitoring tools |
 | **rotaryclub** | [charlieh0tel/rotaryclub](https://github.com/charlieh0tel/rotaryclub) | Pseudo-Doppler radio direction finding |
