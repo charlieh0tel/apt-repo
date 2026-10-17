@@ -1,0 +1,292 @@
+Package: agent-tools
+Version: 1.1.2
+Architecture: all
+Maintainer: Christopher Hoover <ch@murgatroid.com>
+Installed-Size: 64
+Depends: python3 (>= 3.10), procps, rsync (>= 3.2.3), openssh-client
+Recommends: tmux
+Homepage: https://github.com/charlieh0tel/agent-tools
+Priority: optional
+Section: utils
+Filename: pool/main/a/agent-tools/agent-tools_1.1.2_all.deb
+Size: 20220
+SHA256: 0586dd4f34053fc25841b75aa6ca790e34be7be0d50145607020f2bfabd62cf9
+SHA1: be32759084578010a112c39eb380de69253851be
+MD5sum: 4d758128500d9c2adfa8d9da4191910f
+Description: Small tools for working with coding agents
+ agent-ps lists running Claude Code and Codex processes with their
+ working directory, age, tty and tmux pane. Detection is process-based
+ (ps and /proc), and Claude rows are enriched from the per-session
+ metadata Claude Code writes under ~/.claude/sessions.
+ .
+ claude-sync syncs Claude Code sessions between two machines over ssh
+ and rsync, so a session can be resumed on either one.
+
+Package: asl-dmr-bridge
+Version: 2.29.3-1
+Architecture: amd64
+Maintainer: Christopher Hoover (AI6KG) <ch@murgatroid.com>
+Installed-Size: 59233
+Depends: libasound2 (>= 1.0.29), libc6 (>= 2.34), libstdc++6 (>= 11), libudev1, wget
+Priority: optional
+Section: hamradio
+Filename: pool/main/a/asl-dmr-bridge/asl-dmr-bridge_2.29.3-1_amd64.deb
+Size: 27099992
+SHA256: 53290302cecb758ae3e15072e9fb542e1c249a933d098c9f974665dc1f8dd73e
+SHA1: b3dbb7587f610da3953f2600f3adc26ecaba4e6d
+MD5sum: 86e7106486482dc86a10910d3f22d7a0
+Description: Bridge between AllStarLink (ASL3) FM repeaters and Brandmeister DMR networks
+ via the Homebrew protocol.
+ asl-dmr-bridge connects an AllStarLink (ASL3) FM node to a Brandmeister DMR
+ repeater over the Homebrew protocol, transcoding USRP-format audio to AMBE+2
+ via a neural / dynarmic / ThumbDV / AMBEserver backend.  Includes a systemd
+ unit and a sample configuration.
+
+Package: jackerymon
+Version: 0.2.12-1
+Architecture: amd64
+Homepage: https://github.com/charlieh0tel/jackerymon
+Maintainer: Christopher Hoover <ch@murgatroid.com>
+Installed-Size: 12958
+Depends: bluez, libc6 (>= 2.34), libdbus-1-3 (>= 1.9.14), systemd
+Priority: optional
+Section: utils
+Filename: pool/main/j/jackerymon/jackerymon_0.2.12-1_amd64.deb
+Size: 3572044
+SHA256: b4ccae701e6d2b47980a9176725d55a55ee7b886c95cb99807eadafdc25759af
+SHA1: 861ae7a76afccc8a9591656c7699c13a5ac39518
+MD5sum: 116fd8f810d85ab8a704fefa43d8b868
+Description: Jackery Explorer and HomePower monitor over BLE: TUI, daemon, metrics
+ Talks to Jackery Explorer and HomePower power stations over Bluetooth LE,
+ without Jackery's cloud: a live terminal view, settings, and a daemon that
+ serves a web view, Prometheus metrics, status, and control for every unit with
+ a key.
+
+Package: lantiq-exporter
+Version: 0.1.7-1
+Architecture: amd64
+Homepage: https://github.com/charlieh0tel/lantiq-exporter
+Maintainer: Christopher Hoover <ch@murgatroid.com>
+Installed-Size: 452
+Depends: adduser, libc6 (>= 2.34), openssh-client, sshpass
+Priority: optional
+Section: net
+Filename: pool/main/l/lantiq-exporter/lantiq-exporter_0.1.7-1_amd64.deb
+Size: 198308
+SHA256: 2a532891b0d10c3d2c9e1166b07ded8646d7c6ead4aafa1a772468751d0b250a
+SHA1: 80846bfa110ad8ae85e0c732ab83ec1ce4f18c09
+MD5sum: 5d9fd7c19ef0f3132353dff721f70978
+Description: Prometheus exporter for a Lantiq/Falcon GPON ONT-on-a-stick
+ Reads optical levels, PON/GTC state and GEM counters read-only over SSH from a
+ Lantiq (Falcon) GPON ONT-on-a-stick (FS.com GPON-ONU-34-20BI / Nokia G-010G-A
+ class) and serves them at /metrics for a remote Prometheus or Netdata to
+ scrape. No agent runs on the ONT.
+
+Package: renogymon-aprs
+Version: 1.4.1-1
+Architecture: amd64
+Homepage: https://github.com/charlieh0tel/renogymon
+Maintainer: Christopher Hoover <ch@murgatroid.com>
+Installed-Size: 6064
+Depends: libc6 (>= 2.34)
+Priority: optional
+Section: hamradio
+Filename: pool/main/r/renogymon-aprs/renogymon-aprs_1.4.1-1_amd64.deb
+Size: 2051516
+SHA256: cd539141a7c7d276b5b50d882b84bdfd412b21014491f90bce9debd27047df68
+SHA1: 59c8b07ef54f807705624113a3bd08544f90e7ac
+MD5sum: c016ecb245bcd3b052970bae7944a9d9
+Description: Report Renogy BMS telemetry to APRS via direwolf
+ Reads Renogy BMS telemetry from VictoriaMetrics and reports it to APRS via
+ direwolf.
+
+Package: renogymon-archiver
+Version: 1.4.1-1
+Architecture: amd64
+Homepage: https://github.com/charlieh0tel/renogymon
+Maintainer: Christopher Hoover <ch@murgatroid.com>
+Installed-Size: 9656
+Depends: libc6 (>= 2.34), rsync
+Recommends: openssh-server
+Priority: optional
+Section: hamradio
+Filename: pool/main/r/renogymon-archiver/renogymon-archiver_1.4.1-1_amd64.deb
+Size: 2652000
+SHA256: ed7dc4aa7d6369fcf6f01d8a4017814c27631205b4cf945016de646bbd9175fb
+SHA1: 735d5c679697cac73f17aa35a35e3c8fd7591e4a
+MD5sum: 6b65a57654848505dbcb6228425dcad4
+Description: Export Renogy BMS metrics from VictoriaMetrics to Parquet
+ Exports Renogy BMS history from VictoriaMetrics to daily Parquet files for an
+ archive host to pull.
+
+Package: renogymon-archiver-puller
+Version: 1.4.1-1
+Architecture: amd64
+Homepage: https://github.com/charlieh0tel/renogymon
+Maintainer: Christopher Hoover <ch@murgatroid.com>
+Installed-Size: 4974
+Depends: libc6 (>= 2.34), openssh-client, rsync
+Recommends: default-mta | mail-transport-agent
+Priority: optional
+Section: utils
+Filename: pool/main/r/renogymon-archiver-puller/renogymon-archiver-puller_1.4.1-1_amd64.deb
+Size: 1738864
+SHA256: 186966ec1f3e7f03161520fa32a692e79838c858c715d97e0c46e1e45260a3a2
+SHA1: f7b29f0227966254bab260fd405c0e17e54f6795
+MD5sum: 77aeddfb8f2bf2b6797da8b675bf4315
+Description: Pull Renogy Parquet archives from the RPi4 over Tailscale
+ Pulls daily Parquet archives staged by renogymon-archiver on the RPi4 over
+ rsync/SSH (Tailscale), deleting them on the source after a successful transfer.
+
+Package: renogymon-collector
+Version: 1.4.1-1
+Architecture: amd64
+Homepage: https://github.com/charlieh0tel/renogymon
+Maintainer: Christopher Hoover <ch@murgatroid.com>
+Installed-Size: 14413
+Depends: libc6 (>= 2.34)
+Priority: optional
+Section: hamradio
+Filename: pool/main/r/renogymon-collector/renogymon-collector_1.4.1-1_amd64.deb
+Size: 3462544
+SHA256: 1b72d449adff59a7362569d879ffd72addab10bcce624c143860ea696b037859
+SHA1: 121fb13cd1566307a768a0bc9446dd299c8165c3
+MD5sum: 755129bb71d4a2cf6ab6624060daa3cc
+Description: Collect Renogy BMS metrics to VictoriaMetrics, with a terminal UI
+ Collects Renogy BMS metrics over Bluetooth/serial and exports to
+ VictoriaMetrics, plus a terminal UI.
+
+Package: rotaryclub
+Version: 4.3.2-1
+Architecture: amd64
+Homepage: https://github.com/charlieh0tel/rotaryclub
+Maintainer: Christopher Hoover <ch@murgatroid.com>
+Installed-Size: 2267
+Depends: libasound2, libasound2 (>= 1.0.29), libc6 (>= 2.34), libdbus-1-3 (>= 1.9.14)
+Priority: optional
+Section: hamradio
+Filename: pool/main/r/rotaryclub/rotaryclub_4.3.2-1_amd64.deb
+Size: 819944
+SHA256: 8fc2af4ba54ceaf21bba487f8513e90f36d0183fe216431f2a0ea8b95b2433ca
+SHA1: 990f038b0d7ed216f1bd3aabfc61a0ff5cfc1c9d
+MD5sum: 245f445cf0cfbdc3782f8ff63cdb6cef
+Description: Pseudo-Doppler Radio Direction Finding system
+ A pseudo-Doppler radio direction finding (RDF) system implementation in Rust.
+ Processes stereo audio from a rotating antenna array to calculate radio signal
+ bearings with high accuracy (~1-2° with correlation method).
+ .
+ Features:
+ - Two bearing calculation methods (zero-crossing and I/Q correlation)
+ - Digital phase-locked loop (DPLL) for robust north reference tracking
+ - Automatic gain control (AGC) for varying signal strengths
+ - Real-time audio processing with low latency
+ - CLI with configurable parameters
+
+Package: smartclockmon
+Version: 1.6.11-1
+Architecture: amd64
+Homepage: https://github.com/charlieh0tel/smartclockmon
+Maintainer: Christopher Hoover <ch@murgatroid.com>
+Installed-Size: 23109
+Depends: adduser, libc6 (>= 2.34), temper (>= 1.3.0)
+Priority: optional
+Section: utils
+Filename: pool/main/s/smartclockmon/smartclockmon_1.6.11-1_amd64.deb
+Size: 3532384
+SHA256: 178c9efc33687ae84522136a38c2bb23ebd303361e8f71447861ae69ba5b2ca0
+SHA1: bd17f95e57cbfa31742bf91915c9fc88e544fcc7
+MD5sum: 35e98a8e2b001f9cb9a1fb3c79064b7b
+Description: Logging daemon for a SmartClock receiver
+ Library, logging daemon and terminal monitor for HP / Symmetricom SmartClock
+ GPS time and frequency reference receivers, spoken to over RS-232.  The daemon
+ holds the serial port open and records oscillator and holdover history so it
+ accumulates whether or not anyone is watching.
+
+Package: temper
+Version: 2.0.0-1
+Architecture: amd64
+Homepage: https://github.com/charlieh0tel/temper
+Maintainer: Christopher Hoover <ch@murgatroid.com>
+Installed-Size: 1271
+Depends: adduser, libc6 (>= 2.34)
+Priority: optional
+Section: utils
+Filename: pool/main/t/temper/temper_2.0.0-1_amd64.deb
+Size: 439584
+SHA256: 48deb846f8c8cb8525336b813a93361295eb48e77ee0141963807d4b875ddeb3
+SHA1: eb1b745ffa8c85b17a5c762a937bb99f88d2e5f6
+MD5sum: dffc83ef7bd224e51322e77d31970f19
+Description: Command-line tool for PCsensor TEMPerGold, TEMPerHUM and TEMPer2 USB sticks
+ temper reads a PCsensor TEMPerGold or TEMPer2 USB thermometer or a TEMPerHUM
+ thermometer and hygrometer over hidraw: the reading, what the stick reports
+ about itself, and a JSON Lines log.  Access to the stick's hidraw node is given
+ to group temper and to the user at the seat.
+
+Package: usbrelay-rs
+Version: 0.1.3-1
+Architecture: amd64
+Homepage: https://github.com/charlieh0tel/usbrelay-rs
+Maintainer: Christopher Hoover <ch@murgatroid.com>
+Installed-Size: 856
+Depends: libc6 (>= 2.34), libftdi1-2 (>= 1.2)
+Priority: optional
+Section: utility
+Filename: pool/main/u/usbrelay-rs/usbrelay-rs_0.1.3-1_amd64.deb
+Size: 306480
+SHA256: affc580cfd3bbcb1dc50e5f42a46488ec8123a41966d441337b038fc45dcc5e1
+SHA1: fa16aae110015fdd96d074f5e1df74087ddd481f
+MD5sum: 0ff58d6c7165fd5eaa5947863b5d4a81
+Description: USB relay support
+ USB relay utilities.
+
+Package: w6otx
+Version: 0.9.0-1
+Architecture: amd64
+Maintainer: Christopher Hoover <ch@murgatroid.com>
+Installed-Size: 2441
+Depends: libc6 (>= 2.34)
+Priority: optional
+Section: utility
+Filename: pool/main/w/w6otx/w6otx_0.9.0-1_amd64.deb
+Size: 722184
+SHA256: 9a52a0304c2dc031829f43cc6816df31b9b80fe37ca610fd63a9390f02a902a5
+SHA1: a47c82ac5d63b992a2e696595a079e7f16bc2c16
+MD5sum: 35dc56dd9e3ef9b6befb06f441cd6819
+Description: Power control CLI and web app for W6OTX repeater system.
+ Care and feeding of the W6OTX repeaters.
+ .
+ 73 DE AI6KG
+
+Package: weather
+Version: 0.9.4-1
+Architecture: amd64
+Maintainer: Christopher Hoover <ch@murgatroid.com>
+Installed-Size: 14336
+Depends: libasound2 (>= 1.0.29), libc6 (>= 2.34), libespeak-ng1, libespeak-ng1 (>= 1.50+dfsg), sox
+Priority: optional
+Section: utility
+Filename: pool/main/w/weather/weather_0.9.4-1_amd64.deb
+Size: 2623224
+SHA256: e5438cf983b9de8561c08f6ceca9d2b8453e032b1aca090512a9628aeb20a4d7
+SHA1: 2151999ecb18da4d060147e7ea303611879a052d
+MD5sum: 07077a213496849f38a221f7934295e7
+Description: Weather application with text-to-speech support
+ A weather application with text-to-speech support.
+ Supports multiple TTS backends including espeak and Google TTS.
+
+Package: wg-netns
+Version: 1.0.2-1+ci23993564208~git449188e1
+Architecture: all
+Maintainer: Christopher Hoover <ch@murgatroid.com>
+Installed-Size: 35
+Depends: python3:any
+Priority: optional
+Section: contrib/net
+Filename: pool/main/w/wg-netns/wg-netns_1.0.2-1+ci23993564208~git449188e1_all.deb
+Size: 6996
+SHA256: c4a8c4e90711a418d41cc162e402bf2f762ef39cb0318572e9384d7a01b38d90
+SHA1: 3a39121b90e224ffe3903cc2020424aa187a0818
+MD5sum: 870a9543c8ac2022ffa13c26469cfcd9
+Description: Wireguard in network namespaces.
+ Support for setting up wireguard in network namespaces.
+
