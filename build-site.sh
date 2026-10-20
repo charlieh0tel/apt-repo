@@ -76,9 +76,10 @@ write_index() {
 <p>APT repository hosted on GitHub Pages. See the
 <a href="https://github.com/${REPO}">source repo</a> for details.</p>
 <h2>Adding the repository</h2>
-<pre>curl -fsSL ${PAGES_URL}/public.key \\
-  | sudo gpg --dearmor -o /usr/share/keyrings/${OWNER}.gpg
-echo "deb [signed-by=/usr/share/keyrings/${OWNER}.gpg]" \\
+<pre>sudo install -m 0755 -d /etc/apt/keyrings
+curl -fsSL ${PAGES_URL}/public.key \\
+  | sudo gpg --dearmor -o /etc/apt/keyrings/${OWNER}.gpg
+echo "deb [signed-by=/etc/apt/keyrings/${OWNER}.gpg]" \\
   "${PAGES_URL} ${SUITE} main" \\
   | sudo tee /etc/apt/sources.list.d/${OWNER}.list
 sudo apt-get update</pre>
