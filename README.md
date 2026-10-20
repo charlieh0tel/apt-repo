@@ -8,10 +8,11 @@ Run the following on the target machine to trust the signing key, add the repo, 
 
 ```bash
 # Import the signing key
-curl -fsSL https://charlieh0tel.github.io/apt-repo/public.key | sudo gpg --dearmor -o /usr/share/keyrings/charlieh0tel.gpg
+sudo install -m 0755 -d /etc/apt/keyrings
+curl -fsSL https://charlieh0tel.github.io/apt-repo/public.key | sudo gpg --dearmor -o /etc/apt/keyrings/charlieh0tel.gpg
 
 # Add the repository
-echo "deb [signed-by=/usr/share/keyrings/charlieh0tel.gpg] https://charlieh0tel.github.io/apt-repo bookworm main" | sudo tee /etc/apt/sources.list.d/charlieh0tel.list
+echo "deb [signed-by=/etc/apt/keyrings/charlieh0tel.gpg] https://charlieh0tel.github.io/apt-repo bookworm main" | sudo tee /etc/apt/sources.list.d/charlieh0tel.list
 
 # Update and install
 sudo apt-get update
