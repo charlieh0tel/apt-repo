@@ -9,12 +9,15 @@ readonly README="${REPO_DIR}/README.md"
 
 main() {
   local table
-  table="$(packages | awk -F'\t' '
+  table="$(package_table | awk -F'\t' '
     BEGIN {
-      print "| Package | Source | Description |"
-      print "|---------|--------|-------------|"
+      print "| Source | Package | Description |"
+      print "|--------|---------|-------------|"
     }
-    { printf "| **%s** | [%s](https://github.com/%s) | %s |\n", $2, $1, $1, $3 }
+    {
+      src = $1 == "" ? "" : sprintf("[%s](https://github.com/%s)", $1, $1)
+      printf "| %s | **%s** | %s |\n", src, $2, $3
+    }
   ')"
   awk -v table="${table}" '
     /<!-- packages-start -->/ { print; print table; skip = 1; next }

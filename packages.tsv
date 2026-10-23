@@ -1,12 +1,16 @@
 charlieh0tel/asl-dmr-bridge	asl-dmr-bridge	ASL DMR Bridge
 charlieh0tel/jackerymon	jackerymon	Jackery Explorer power station monitor over BLE
 charlieh0tel/lantiq-exporter	lantiq-exporter	Prometheus exporter for a Lantiq/Falcon GPON ONT
-charlieh0tel/renogymon	renogymon	Renogy BMS monitoring tools
+charlieh0tel/renogymon	renogymon-aprs	Report Renogy BMS telemetry to APRS via direwolf
+charlieh0tel/renogymon	renogymon-archiver	Export Renogy BMS metrics from VictoriaMetrics to Parquet
+charlieh0tel/renogymon	renogymon-archiver-puller	Pull Renogy Parquet archives from the RPi4 over Tailscale
+charlieh0tel/renogymon	renogymon-collector	Collect Renogy BMS metrics to VictoriaMetrics, with a terminal UI
 charlieh0tel/rotaryclub	rotaryclub	Pseudo-Doppler radio direction finding
-charlieh0tel/smartclock	smartclockmon	HP / Symmetricom SmartClock GPS receiver monitoring
+charlieh0tel/smartclock	smartclockmon	Logging daemon for a SmartClock receiver
 charlieh0tel/temper	temper	TEMPerGold/TEMPerHUM/TEMPer2 USB sticks: CLI
 charlieh0tel/usbrelay-rs	usbrelay-rs	USB relay utilities
 charlieh0tel/weather-rs	weather	Weather with text-to-speech
 charlieh0tel/wg-netns	wg-netns	WireGuard in network namespaces
 PAARA-org/w6otx	w6otx	W6OTX repeater power control
 charlieh0tel/agent-tools	agent-tools	Find running coding agents and their working directories
+charlieh0tel/smartclock	smartclock-utils	One-shot queries, diagnostics, and transcript capture for SmartClock receivers
