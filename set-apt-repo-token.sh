@@ -39,7 +39,7 @@ EOT
   # Setting a secret needs admin on the repo, so a call can fail.  Collect
   # the failures and report them at the end rather than stopping partway.
   local repo failed=()
-  while IFS=$'\t' read -r repo _; do
+  while read -r repo; do
     if [[ -v SKIP[${repo}] ]]; then
       echo "Skipping ${repo}: ${SKIP[${repo}]}"
       continue
@@ -50,7 +50,7 @@ EOT
     then
       failed+=("${repo}")
     fi
-  done < <(packages)
+  done < <(repos)
 
   if [[ ${#failed[@]} -gt 0 ]]; then
     cat >&2 <<EOT

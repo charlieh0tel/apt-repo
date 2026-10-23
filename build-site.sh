@@ -15,11 +15,11 @@ source "$(dirname "${BASH_SOURCE[0]}")/lib.sh"
 #######################################
 fetch_debs() {
   local repo
-  while IFS=$'\t' read -r repo _; do
+  while read -r repo; do
     echo "Fetching latest release from ${repo}..."
     gh release download --repo "${repo}" --pattern '*.deb' --dir "$1" \
       2>/dev/null || echo "  No release found for ${repo}"
-  done < <(packages)
+  done < <(repos)
 }
 
 #######################################
