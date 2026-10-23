@@ -49,9 +49,10 @@ build_repo() {
 #######################################
 write_index() {
   local rows
-  rows="$(packages | awk -F'\t' '{
-    printf "<tr><td><code>%s</code></td>", $2
-    printf "<td><a href=\"https://github.com/%s\">%s</a></td>", $1, $1
+  rows="$(package_table | awk -F'\t' '{
+    src = $1 == "" ? "" \
+      : sprintf("<a href=\"https://github.com/%s\">%s</a>", $1, $1)
+    printf "<tr><td>%s</td><td><code>%s</code></td>", src, $2
     printf "<td>%s</td></tr>\n", $3
   }')"
   cat > "$1" <<HTML
@@ -85,7 +86,7 @@ echo "deb [signed-by=/etc/apt/keyrings/${OWNER}.gpg]" \\
 sudo apt-get update</pre>
 <h2>Available packages</h2>
 <table>
-<thead><tr><th>Package</th><th>Source</th><th>Description</th></tr></thead>
+<thead><tr><th>Source</th><th>Package</th><th>Description</th></tr></thead>
 <tbody>
 ${rows}
 </tbody>
