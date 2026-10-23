@@ -21,3 +21,13 @@ readonly PAGES_URL="https://${OWNER}.github.io/apt-repo"
 packages() {
   awk -F'\t' '!/^#/ && NF > 0' "${PACKAGES_TSV}" | sort -t $'\t' -k2,2
 }
+
+#######################################
+# Print each source repo in packages.tsv once, though it may list several
+# packages.
+# Outputs:
+#   One owner/repo per line.
+#######################################
+repos() {
+  packages | cut -f1 | sort -u
+}

@@ -69,7 +69,7 @@ gh workflow run update-repo.yml --repo charlieh0tel/apt-repo
 
 To add a new source repository whose `.deb` releases will be included in this APT repo:
 
-1. Add a line to `packages.tsv` (tab-separated: `owner/repo`, package name, description):
+1. Add a line per package to `packages.tsv` (tab-separated: `owner/repo`, package name, description).  A repo that builds several packages gets one line for each:
 
    ```
    owner/new-repo	package-name	Short description
