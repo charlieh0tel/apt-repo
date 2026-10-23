@@ -30,7 +30,7 @@ sudo apt-get install rotaryclub   # or any other package
 | **lantiq-exporter** | [charlieh0tel/lantiq-exporter](https://github.com/charlieh0tel/lantiq-exporter) | Prometheus exporter for a Lantiq/Falcon GPON ONT |
 | **renogymon** | [charlieh0tel/renogymon](https://github.com/charlieh0tel/renogymon) | Renogy BMS monitoring tools |
 | **rotaryclub** | [charlieh0tel/rotaryclub](https://github.com/charlieh0tel/rotaryclub) | Pseudo-Doppler radio direction finding |
-| **smartclockmon** | [charlieh0tel/smartclockmon](https://github.com/charlieh0tel/smartclockmon) | HP / Symmetricom SmartClock GPS receiver monitoring |
+| **smartclockmon** | [charlieh0tel/smartclock](https://github.com/charlieh0tel/smartclock) | HP / Symmetricom SmartClock GPS receiver monitoring |
 | **temper** | [charlieh0tel/temper](https://github.com/charlieh0tel/temper) | TEMPerGold/TEMPerHUM/TEMPer2 USB sticks: CLI |
 | **usbrelay-rs** | [charlieh0tel/usbrelay-rs](https://github.com/charlieh0tel/usbrelay-rs) | USB relay utilities |
 | **w6otx** | [PAARA-org/w6otx](https://github.com/PAARA-org/w6otx) | W6OTX repeater power control |
