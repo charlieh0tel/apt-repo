@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>charlieh0tel APT repository</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<style>
+  body { font-family: system-ui, sans-serif; max-width: 48rem;
+         margin: 2rem auto; padding: 0 1rem; line-height: 1.5; }
+  code, pre { font-family: ui-monospace, monospace; }
+  pre { background: #f4f4f4; padding: 1rem; overflow-x: auto; }
+  table { border-collapse: collapse; width: 100%; }
+  th, td { text-align: left; padding: 0.4rem 0.6rem;
+           border-bottom: 1px solid #ddd; }
+</style>
+</head>
+<body>
+<h1>charlieh0tel APT repository</h1>
+<p>APT repository hosted on GitHub Pages. See the
+<a href="https://github.com/charlieh0tel/apt-repo">source repo</a> for details.</p>
+<h2>Adding the repository</h2>
+<pre>sudo install -m 0755 -d /etc/apt/keyrings
+curl -fsSL https://charlieh0tel.github.io/apt-repo/public.key \
+  | sudo gpg --dearmor -o /etc/apt/keyrings/charlieh0tel.gpg
+echo "deb [signed-by=/etc/apt/keyrings/charlieh0tel.gpg]" \
+  "https://charlieh0tel.github.io/apt-repo bookworm main" \
+  | sudo tee /etc/apt/sources.list.d/charlieh0tel.list
+sudo apt-get update</pre>
+<h2>Available packages</h2>
+<table>
+<thead><tr><th>Source</th><th>Package</th><th>Description</th></tr></thead>
+<tbody>
+<tr><td><a href="https://github.com/charlieh0tel/agent-tools">charlieh0tel/agent-tools</a></td><td><code>agent-tools</code></td><td>Find running coding agents and their working directories</td></tr>
+<tr><td><a href="https://github.com/charlieh0tel/asl-dmr-bridge">charlieh0tel/asl-dmr-bridge</a></td><td><code>asl-dmr-bridge</code></td><td>ASL DMR Bridge</td></tr>
+<tr><td><a href="https://github.com/charlieh0tel/chronymon">charlieh0tel/chronymon</a></td><td><code>chronymon</code></td><td>chronyd statistics recorder and web view</td></tr>
+<tr><td><a href="https://github.com/charlieh0tel/jackerymon">charlieh0tel/jackerymon</a></td><td><code>jackerymon</code></td><td>Jackery Explorer power station monitor over BLE</td></tr>
+<tr><td><a href="https://github.com/charlieh0tel/lantiq-exporter">charlieh0tel/lantiq-exporter</a></td><td><code>lantiq-exporter</code></td><td>Prometheus exporter for a Lantiq/Falcon GPON ONT</td></tr>
+<tr><td><a href="https://github.com/charlieh0tel/renogymon">charlieh0tel/renogymon</a></td><td><code>renogymon-aprs</code></td><td>Report Renogy BMS telemetry to APRS via direwolf</td></tr>
+<tr><td></td><td><code>renogymon-archiver</code></td><td>Export Renogy BMS metrics from VictoriaMetrics to Parquet</td></tr>
+<tr><td></td><td><code>renogymon-archiver-puller</code></td><td>Pull Renogy Parquet archives from the RPi4 over Tailscale</td></tr>
+<tr><td></td><td><code>renogymon-collector</code></td><td>Collect Renogy BMS metrics to VictoriaMetrics, with a terminal UI</td></tr>
+<tr><td><a href="https://github.com/charlieh0tel/rotaryclub">charlieh0tel/rotaryclub</a></td><td><code>rotaryclub</code></td><td>Pseudo-Doppler radio direction finding</td></tr>
+<tr><td><a href="https://github.com/charlieh0tel/smartclock">charlieh0tel/smartclock</a></td><td><code>smartclock-utils</code></td><td>One-shot queries, diagnostics, and transcript capture for SmartClock receivers</td></tr>
+<tr><td></td><td><code>smartclockmon</code></td><td>Logging daemon for a SmartClock receiver</td></tr>
+<tr><td><a href="https://github.com/charlieh0tel/temper">charlieh0tel/temper</a></td><td><code>temper</code></td><td>TEMPerGold/TEMPerHUM/TEMPer2 USB sticks: CLI</td></tr>
+<tr><td><a href="https://github.com/charlieh0tel/usbrelay-rs">charlieh0tel/usbrelay-rs</a></td><td><code>usbrelay-rs</code></td><td>USB relay utilities</td></tr>
+<tr><td><a href="https://github.com/charlieh0tel/weather-rs">charlieh0tel/weather-rs</a></td><td><code>weather</code></td><td>Weather with text-to-speech</td></tr>
+<tr><td><a href="https://github.com/charlieh0tel/wg-netns">charlieh0tel/wg-netns</a></td><td><code>wg-netns</code></td><td>WireGuard in network namespaces</td></tr>
+<tr><td><a href="https://github.com/PAARA-org/w6otx">PAARA-org/w6otx</a></td><td><code>w6otx</code></td><td>W6OTX repeater power control</td></tr>
+</tbody>
+</table>
+<p><a href="public.key">GPG public key</a> &middot;
+<a href="dists/bookworm/main/binary-amd64/Packages">amd64 Packages</a> &middot;
+<a href="dists/bookworm/main/binary-arm64/Packages">arm64 Packages</a></p>
+</body>
+</html>
