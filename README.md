@@ -26,6 +26,7 @@ sudo apt-get install rotaryclub   # or any other package
 |--------|---------|-------------|
 | [charlieh0tel/agent-tools](https://github.com/charlieh0tel/agent-tools) | **agent-tools** | Find running coding agents and their working directories |
 | [charlieh0tel/asl-dmr-bridge](https://github.com/charlieh0tel/asl-dmr-bridge) | **asl-dmr-bridge** | ASL DMR Bridge |
+| [charlieh0tel/chronymon](https://github.com/charlieh0tel/chronymon) | **chronymon** | chronyd statistics recorder and web view |
 | [charlieh0tel/jackerymon](https://github.com/charlieh0tel/jackerymon) | **jackerymon** | Jackery Explorer power station monitor over BLE |
 | [charlieh0tel/lantiq-exporter](https://github.com/charlieh0tel/lantiq-exporter) | **lantiq-exporter** | Prometheus exporter for a Lantiq/Falcon GPON ONT |
 | [charlieh0tel/renogymon](https://github.com/charlieh0tel/renogymon) | **renogymon-aprs** | Report Renogy BMS telemetry to APRS via direwolf |
@@ -37,7 +38,7 @@ sudo apt-get install rotaryclub   # or any other package
 |  | **smartclockmon** | Logging daemon for a SmartClock receiver |
 | [charlieh0tel/temper](https://github.com/charlieh0tel/temper) | **temper** | TEMPerGold/TEMPerHUM/TEMPer2 USB sticks: CLI |
 | [charlieh0tel/usbrelay-rs](https://github.com/charlieh0tel/usbrelay-rs) | **usbrelay-rs** | USB relay utilities |
-| [charlieh0tel/weather-rs](https://github.com/charlieh0tel/weather-rs) | **weather** | Weather with text-to-speech |
+| [charlieh0tel/weather-rs](https://github.com/charlieh0tel/weather-rs) | **weather-rs** | Weather reports (METARs, NWS forecasts and alerts) with text-to-speech |
 | [charlieh0tel/wg-netns](https://github.com/charlieh0tel/wg-netns) | **wg-netns** | WireGuard in network namespaces |
 | [PAARA-org/w6otx](https://github.com/PAARA-org/w6otx) | **w6otx** | W6OTX repeater power control |
 <!-- packages-end -->
