@@ -28,9 +28,24 @@ jobs:
     - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1  # v7.0.1
 
     - name: Install reprepro
+      env:
+        # Whole-step apt retries, for outages that outlast apt's own per-fetch
+        # retries.  apt-get update exits 0 on a failed fetch, so the loop wraps
+        # the install too.
+        APT_ATTEMPTS: 3
+        APT_RETRY_DELAY_SECONDS: 30
       run: |
         echo 'Acquire::Retries "3";' | sudo tee /etc/apt/apt.conf.d/80-acquire-retries
-        sudo apt-get update && sudo apt-get install -y reprepro
+        attempt=1
+        until sudo apt-get update && sudo apt-get install -y reprepro; do
+          if [[ "${attempt}" -ge "${APT_ATTEMPTS}" ]]; then
+            echo "::error::apt-get failed after ${APT_ATTEMPTS} attempts"
+            exit 1
+          fi
+          echo "apt-get failed (attempt ${attempt}/${APT_ATTEMPTS}); retrying in ${APT_RETRY_DELAY_SECONDS} s"
+          sleep "${APT_RETRY_DELAY_SECONDS}"
+          attempt=$((attempt + 1))
+        done
 
     - name: Import GPG key
       env:
