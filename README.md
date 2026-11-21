@@ -29,6 +29,7 @@ sudo apt-get install rotaryclub   # or any other package
 | [charlieh0tel/chronymon](https://github.com/charlieh0tel/chronymon) | **chronymon** | chronyd statistics recorder and web view |
 | [charlieh0tel/jackerymon](https://github.com/charlieh0tel/jackerymon) | **jackerymon** | Jackery Explorer power station monitor over BLE |
 | [charlieh0tel/lantiq-exporter](https://github.com/charlieh0tel/lantiq-exporter) | **lantiq-exporter** | Prometheus exporter for a Lantiq/Falcon GPON ONT |
+| [charlieh0tel/mc683xx-bdm](https://github.com/charlieh0tel/mc683xx-bdm) | **mc683xx-bdm** | Host command line, udev rule and firmware for the mc683xx CPU32 BDM pod |
 | [charlieh0tel/renogymon](https://github.com/charlieh0tel/renogymon) | **renogymon-aprs** | Report Renogy BMS telemetry to APRS via direwolf |
 |  | **renogymon-archiver** | Export Renogy BMS metrics from VictoriaMetrics to Parquet |
 |  | **renogymon-archiver-puller** | Pull Renogy Parquet archives from the RPi4 over Tailscale |
