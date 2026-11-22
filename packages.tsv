@@ -16,3 +16,4 @@ charlieh0tel/agent-tools	agent-tools	Find running coding agents and their workin
 charlieh0tel/smartclock	smartclock-utils	One-shot queries, diagnostics, and transcript capture for SmartClock receivers
 charlieh0tel/chronymon	chronymon	chronyd statistics recorder and web view
 charlieh0tel/mc683xx-bdm	mc683xx-bdm	Host command line, udev rule and firmware for the mc683xx CPU32 BDM pod
+charlieh0tel/centerclick-chrony	ntp250-config	CenterClick NTP250 configuration for Debian with chrony
