@@ -78,8 +78,9 @@ Every pull request runs `shellcheck`, `actionlint`, `./check-config.sh`
 (`packages.tsv`, `conf/distributions` and `public.key` agree with each other
 and with the scripts) and `./dry-run.sh`.  The dry run builds the whole
 repository signed with a throwaway key, then points `apt-get update` at the
-result; it publishes nothing and never sees the signing key.  All of them run
-locally too.
+result; it publishes nothing and never sees the signing key.  It fails if a
+package in `packages.tsv` is in no index, so release a package before listing
+it.  All of them run locally too.
 
 ### Adding a source repo
 
