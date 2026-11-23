@@ -31,9 +31,8 @@ apt_update() {
 }
 
 #######################################
-# Check that each architecture has packages, and warn of any package in
-# packages.tsv that none has.  Only a warning: a package can be listed
-# before its first release.
+# Check that each architecture has packages, and that every package in
+# packages.tsv is in at least one of them.
 # Arguments:
 #   Site directory.
 #######################################
@@ -50,7 +49,8 @@ check_packages() {
     <(sed -n 's/^Package: //p' "$1/dists/${SUITE}"/main/binary-*/Packages \
       | sort -u) | paste -sd' ')"
   if [[ -n "${missing}" ]]; then
-    echo "${GITHUB_ACTIONS:+::warning::}No release has: ${missing}" >&2
+    echo "In packages.tsv but in no index: ${missing}" >&2
+    exit 1
   fi
 }
 

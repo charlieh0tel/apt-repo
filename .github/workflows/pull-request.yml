@@ -20,11 +20,26 @@ jobs:
     - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1  # v7.0.1
     - run: shellcheck -x ./*.sh
 
+  # The release binary is fetched at a fixed version and checked against a
+  # fixed digest rather than installed by the project's download script,
+  # which would be a remote script piped into a shell.
   actionlint:
     runs-on: ubuntu-latest
+    env:
+      VERSION: 1.7.12
+      SHA256: 8aca8db96f1b94770f1b0d72b6dddcb1ebb8123cb3712530b08cc387b349a3d8
     steps:
     - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1  # v7.0.1
-    - uses: raven-actions/actionlint@3d39aea434753780c3b3d4a1a31c854b4dbf49d7  # v2.2.0
+    - name: Install actionlint
+      env:
+        GH_TOKEN: ${{ github.token }}
+      run: |
+        archive="actionlint_${VERSION}_linux_amd64.tar.gz"
+        gh release download "v${VERSION}" --repo rhysd/actionlint \
+          --pattern "$archive" --dir "$RUNNER_TEMP"
+        echo "${SHA256}  ${RUNNER_TEMP}/${archive}" | sha256sum --check
+        tar -xzf "${RUNNER_TEMP}/${archive}" -C "$RUNNER_TEMP" actionlint
+    - run: '"$RUNNER_TEMP/actionlint" -color'
 
   check-config:
     runs-on: ubuntu-latest
