@@ -1,0 +1,25 @@
+name: Install reprepro
+description: Install reprepro with apt, retrying through mirror outages.
+
+runs:
+  using: composite
+  steps:
+  - shell: bash
+    env:
+      # Whole-step apt retries, for outages that outlast apt's own per-fetch
+      # retries.  apt-get update exits 0 on a failed fetch, so the loop wraps
+      # the install too.
+      APT_ATTEMPTS: 3
+      APT_RETRY_DELAY_SECONDS: 30
+    run: |
+      echo 'Acquire::Retries "3";' | sudo tee /etc/apt/apt.conf.d/80-acquire-retries
+      attempt=1
+      until sudo apt-get update && sudo apt-get install -y reprepro; do
+        if [[ "${attempt}" -ge "${APT_ATTEMPTS}" ]]; then
+          echo "::error::apt-get failed after ${APT_ATTEMPTS} attempts"
+          exit 1
+        fi
+        echo "apt-get failed (attempt ${attempt}/${APT_ATTEMPTS}); retrying in ${APT_RETRY_DELAY_SECONDS} s"
+        sleep "${APT_RETRY_DELAY_SECONDS}"
+        attempt=$((attempt + 1))
+      done

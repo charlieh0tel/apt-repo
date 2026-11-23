@@ -3,6 +3,11 @@
 # packages.tsv, add them with reprepro, and write the site index.
 #
 # CI runs this.  It needs gh, reprepro and the signing key in the keyring.
+#
+# Environment:
+#   APT_REPO_SIGN_WITH: fingerprint of a key to sign with instead of the one in
+#     conf/distributions; its public half is published instead of public.key.
+#     dry-run.sh sets it to a throwaway key.  The publishing build must not.
 set -o errexit -o nounset -o pipefail
 
 # shellcheck source=lib.sh
@@ -24,6 +29,8 @@ fetch_debs() {
 
 #######################################
 # Add every .deb to the repository and sign it.
+# Globals:
+#   APT_REPO_SIGN_WITH
 # Arguments:
 #   Site directory to build into.
 #   Directory holding the .debs.
@@ -32,13 +39,21 @@ build_repo() {
   local deb
   mkdir -p "$1/conf"
   cp "${REPO_DIR}/conf/distributions" "$1/conf/"
+  if [[ -n "${APT_REPO_SIGN_WITH:-}" ]]; then
+    sed -i "s/^SignWith:.*/SignWith: ${APT_REPO_SIGN_WITH}/" \
+      "$1/conf/distributions"
+  fi
   for deb in "$2"/*.deb; do
     [[ -f "${deb}" ]] || continue
     echo "Adding ${deb}..."
     reprepro -V --basedir "$1" includedeb "${SUITE}" "${deb}" 2>&1 \
       || echo "  Skipped ${deb}"
   done
-  cp "${REPO_DIR}/public.key" "$1/"
+  if [[ -n "${APT_REPO_SIGN_WITH:-}" ]]; then
+    gpg --armor --export "${APT_REPO_SIGN_WITH}" > "$1/public.key"
+  else
+    cp "${REPO_DIR}/public.key" "$1/"
+  fi
   rm -rf "$1/conf" "$1/db"
 }
 

@@ -26,6 +26,7 @@ sudo apt-get install rotaryclub   # or any other package
 |--------|---------|-------------|
 | [charlieh0tel/agent-tools](https://github.com/charlieh0tel/agent-tools) | **agent-tools** | Find running coding agents and their working directories |
 | [charlieh0tel/asl-dmr-bridge](https://github.com/charlieh0tel/asl-dmr-bridge) | **asl-dmr-bridge** | ASL DMR Bridge |
+| [charlieh0tel/centerclick-chrony](https://github.com/charlieh0tel/centerclick-chrony) | **ntp250-config** | CenterClick NTP250 configuration for Debian with chrony |
 | [charlieh0tel/chronymon](https://github.com/charlieh0tel/chronymon) | **chronymon** | chronyd statistics recorder and web view |
 | [charlieh0tel/jackerymon](https://github.com/charlieh0tel/jackerymon) | **jackerymon** | Jackery Explorer power station monitor over BLE |
 | [charlieh0tel/lantiq-exporter](https://github.com/charlieh0tel/lantiq-exporter) | **lantiq-exporter** | Prometheus exporter for a Lantiq/Falcon GPON ONT |
@@ -70,6 +71,15 @@ It is a wrapper around:
 ```bash
 gh workflow run update-repo.yml --repo charlieh0tel/apt-repo
 ```
+
+### Checking a change
+
+Every pull request runs `shellcheck`, `actionlint`, `./check-config.sh`
+(`packages.tsv`, `conf/distributions` and `public.key` agree with each other
+and with the scripts) and `./dry-run.sh`.  The dry run builds the whole
+repository signed with a throwaway key, then points `apt-get update` at the
+result; it publishes nothing and never sees the signing key.  All of them run
+locally too.
 
 ### Adding a source repo
 
