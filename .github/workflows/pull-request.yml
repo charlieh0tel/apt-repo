@@ -1,0 +1,45 @@
+name: Pull request
+
+# No paths filter: every job reports on every pull request, so any of them can
+# be made a required status check.
+on:
+  pull_request:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+# Nothing here reads a secret, so it all works for Dependabot and forks.
+jobs:
+  shellcheck:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1  # v7.0.1
+    - run: shellcheck -x ./*.sh
+
+  actionlint:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1  # v7.0.1
+    - uses: raven-actions/actionlint@3d39aea434753780c3b3d4a1a31c854b4dbf49d7  # v2.2.0
+
+  check-config:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1  # v7.0.1
+    - run: ./check-config.sh
+    - name: Check that the README package table matches packages.tsv
+      run: ./update-packages.sh && git diff --exit-code README.md
+
+  dry-run-build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1  # v7.0.1
+    - uses: ./.github/actions/install-reprepro
+    - name: Build, sign with a throwaway key, and point apt at the result
+      env:
+        GH_TOKEN: ${{ github.token }}
+      run: ./dry-run.sh site
