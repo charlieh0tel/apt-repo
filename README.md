@@ -54,6 +54,9 @@ The repository rebuilds automatically every day at 06:00 UTC, so new package rel
 The workflow runs in two jobs. `build` fetches the latest release of every
 repository in `packages.tsv`, assembles the repository with `reprepro` and
 signs it; `publish` takes what `build` produced and pushes it to `gh-pages`.
+`build` runs `./check-config.sh` first and `./check-site.sh` on what it built
+last, so a run that fails either publishes nothing and the previous
+repository stays live.
 They are separate so that the third-party action that publishes never runs in
 a job where the signing key exists.
 

@@ -28,6 +28,10 @@ jobs:
     steps:
     - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1  # v7.0.1
 
+    # Before the key is imported: a bad packages.tsv or conf/distributions
+    # stops the run here.
+    - run: ./check-config.sh
+
     - uses: ./.github/actions/install-reprepro
 
     - name: Import GPG key
@@ -39,6 +43,13 @@ jobs:
       env:
         GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       run: ./build-site.sh site
+
+    # build-site.sh skips what it cannot fetch, add or sign and still exits 0.
+    # Failing here uploads nothing, so publish is skipped and yesterday's
+    # repository stays live.  The empty keyring shows the check needs only the
+    # public.key the site publishes, as a user's machine would have.
+    - name: Check the built repository
+      run: GNUPGHOME="$(mktemp -d)" ./check-site.sh site
 
     - name: Hand the built repository to the publishing job
       uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9  # v7.0.2
