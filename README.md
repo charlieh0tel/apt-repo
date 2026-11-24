@@ -39,6 +39,7 @@ sudo apt-get install rotaryclub   # or any other package
 | [charlieh0tel/smartclock](https://github.com/charlieh0tel/smartclock) | **smartclock-utils** | One-shot queries, diagnostics, and transcript capture for SmartClock receivers |
 |  | **smartclockmon** | Logging daemon for a SmartClock receiver |
 | [charlieh0tel/temper](https://github.com/charlieh0tel/temper) | **temper** | TEMPerGold/TEMPerHUM/TEMPer2 USB sticks: CLI |
+| [charlieh0tel/tsproxy](https://github.com/charlieh0tel/tsproxy) | **tsproxy** | Expose a TCP service to a tailnet |
 | [charlieh0tel/usbrelay-rs](https://github.com/charlieh0tel/usbrelay-rs) | **usbrelay-rs** | USB relay utilities |
 | [charlieh0tel/weather-rs](https://github.com/charlieh0tel/weather-rs) | **weather-rs** | Weather reports (METARs, NWS forecasts and alerts) with text-to-speech |
 | [charlieh0tel/wg-netns](https://github.com/charlieh0tel/wg-netns) | **wg-netns** | WireGuard in network namespaces |
